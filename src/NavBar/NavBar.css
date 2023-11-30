@@ -1,0 +1,23 @@
+@media (max-width:815px){
+    .headerMenu{
+        display: none;
+    }
+    .navBar{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    
+
+}
+@media (min-width:810px){
+    .menuIcon{
+        display: none;
+    }
+    .navBar{
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+    }
+    
+}

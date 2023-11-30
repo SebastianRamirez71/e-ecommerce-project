@@ -1,0 +1,14 @@
+@media (max-width: 810px) {
+  .cardProduct {
+    width: 200px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 810px) {
+  .cardProduct {
+    margin: 0 auto;
+    width: 350px;
+  }
+  
+}
