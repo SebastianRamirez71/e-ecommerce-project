@@ -1,8 +1,9 @@
-@media (max-width: 810px) {
+@media (max-width: 460px) {
   .cardProduct {
-    width: 200px;
-    margin: 0 auto;
+    width: 170px;
+
   }
+
 }
 
 @media (min-width: 810px) {
@@ -10,5 +11,6 @@
     margin: 0 auto;
     width: 350px;
   }
+  
   
 }

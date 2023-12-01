@@ -1,28 +1,42 @@
 import React from "react";
-import { Card, Tag } from "antd";
+import { Card, Divider, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-  
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 function CarouselP({ products }) {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 }, 
+      items: 2,
+    },
   };
   return (
-    <div className="w-3/4 m-auto">
-      <div className="mt-20">
-        <Slider {...settings} >
+    <div style={{marginBottom:"30px"}}>
+    <Divider />
+      <h3>PRODUCTOS EN OFERTA</h3>
+    
+        <Carousel responsive={responsive}  >
           {products.map((product) => (
-            <Card 
-              className="bg-white h-[450px] text-black rounded-xl"
+            <Card
+              style={{height:"100%", maxWidth:"450px", margin:"auto 0.5rem", justifyContent:"center", alignItems:"center"}}
+              
               cover={
                 <img
-                  style={{ width: "100%" }}
+                  style={{ height:"100%" }}
                   src={product.img}
                   alt={product.title}
                 />
@@ -34,9 +48,9 @@ function CarouselP({ products }) {
               {product.stock > 0 ? <Tag>SIN STOCK</Tag> : null}
             </Card>
           ))}
-        </Slider>
-      </div>
-    </div>
+        </Carousel>
+        </div>
+    
   );
 }
 

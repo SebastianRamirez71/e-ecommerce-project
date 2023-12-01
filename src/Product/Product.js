@@ -7,6 +7,7 @@ import FilterProducts from "../FilterProducts/FilterProducts";
 import Carousel from "../Carousel/Carousel";
 
 function Product() {
+  const productsOffer = [...Products].sort((a, b) => a.price - b.price);
   const [filteredProducts, setFilteredProducts] = useState(Products);
   const handleFilterChange = (filterType) => {
     let sortedProducts = [];
@@ -19,14 +20,16 @@ function Product() {
 
     setFilteredProducts(sortedProducts);
   };
+
   return (
     <div className="container">
       <FilterProducts onFilterChange={handleFilterChange} />
-      <div className="row">
+      <div className="row mr-auto">
         {filteredProducts.map((product) => (
-          <div key={product.id} className="col-md-6">
+          <div key={product.id} className="col-6 col-sm-6 col-md-6 col-lg-6"
+          style={{marginBottom:"15px"}}>
             <Card
-              style={{ marginBottom: "20px" }}
+              style={{  height:"100%" }}
               className="cardProduct"
               cover={
                 <img
@@ -37,14 +40,13 @@ function Product() {
               }
             >
               <Meta title={product.title} />
-
               <p>${product.price}</p>
               {product.stock > 0 ? <Tag>SIN STOCK</Tag> : null}
             </Card>
           </div>
         ))}
       </div>
-      <Carousel products = {filteredProducts}/>
+      <Carousel products={productsOffer} />
     </div>
   );
 }
