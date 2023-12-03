@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Category.css"
-import FilterProducts from '../FilterProducts/FilterProducts'
 function Category() {
   return (
 
