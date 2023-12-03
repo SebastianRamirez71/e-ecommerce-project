@@ -18,7 +18,13 @@ function Product() {
       sortedProducts = [...Products].sort((a, b) => a.price - b.price);
     } else if (filterType === "highToLow") {
       sortedProducts = [...Products].sort((a, b) => b.price - a.price);
-    }
+    } else if (filterType === "stock") {
+      sortedProducts = Products.filter((product) => product.stock > 0);
+    } else if (filterType === "all") {
+      sortedProducts = Products;
+    } else if (filterType === "top") {
+      sortedProducts = Products.filter((product) => product.category == "top");
+    } 
 
     setFilteredProducts(sortedProducts);
   };
@@ -37,7 +43,6 @@ function Product() {
               style={{ height: "100%" }}
               className="cardProduct"
               cover={
-
                 <Link to={`/product/${product.id}`} state={{ product }}>
                   <img
                     style={{ width: "100%" }}
@@ -49,7 +54,7 @@ function Product() {
             >
               <Meta title={product.title} />
               <p>${product.price}</p>
-              {product.stock > 0 ? <Tag>SIN STOCK</Tag> : null}
+              {product.stock < 1 ? <Tag>SIN STOCK</Tag> : null}
             </Card>
           </div>
         ))}

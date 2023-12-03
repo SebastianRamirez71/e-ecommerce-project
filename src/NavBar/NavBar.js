@@ -3,6 +3,7 @@ import { App, Button, Col, Drawer, Image, Menu, Row, Space } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -94,15 +95,18 @@ function AppMenu({ isInLine = false }) {
           )}
         </Col>
         <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>
+        <Link to={"/home"}>
           <Image
             width={350}
             preview={false}
+            
             src={
               isInLine
                 ? ""
                 : "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/274/538/themes/common/logo-1912741912-1692334118-ade6bc1eae5bf162bf182280d8cfcb781692334118-480-0.png?0"
             }
           />
+          </Link>
         </Col>
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
           {isInLine ? (
