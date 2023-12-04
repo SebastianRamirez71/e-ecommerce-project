@@ -6,6 +6,7 @@ import Products from "../ProductsJSON";
 import "./Product.css";
 import FilterProducts from "../FilterProducts/FilterProducts";
 import Carousel from "../Carousel/Carousel";
+import ProductCard from "../ProductCard/ProductCard";
 
 function Product() {
   const productsOffer = [...Products].sort((a, b) => a.price - b.price);
@@ -20,11 +21,9 @@ function Product() {
       sortedProducts = [...Products].sort((a, b) => b.price - a.price);
     } else if (filterType === "stock") {
       sortedProducts = Products.filter((product) => product.stock > 0);
-    } else if (filterType === "all") {
+    } else if (filterType === "Filtrar") {
       sortedProducts = Products;
-    } else if (filterType === "top") {
-      sortedProducts = Products.filter((product) => product.category == "top");
-    } 
+    }
 
     setFilteredProducts(sortedProducts);
   };
@@ -39,23 +38,7 @@ function Product() {
             className="col-6 col-sm-6 col-md-6 col-lg-6"
             style={{ marginBottom: "15px" }}
           >
-            <Card
-              style={{ height: "100%" }}
-              className="cardProduct"
-              cover={
-                <Link to={`/product/${product.id}`} state={{ product }}>
-                  <img
-                    style={{ width: "100%" }}
-                    src={product.img}
-                    alt={product.title}
-                  />
-                </Link>
-              }
-            >
-              <Meta title={product.title} />
-              <p>${product.price}</p>
-              {product.stock < 1 ? <Tag>SIN STOCK</Tag> : null}
-            </Card>
+            <ProductCard product={product} />
           </div>
         ))}
       </div>

@@ -3,6 +3,7 @@ import { Card, Divider, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import CardCarousel from "../ProductCard/CardCarouse";
 
 function CarouselP({ products }) {
   const responsive = {
@@ -20,37 +21,21 @@ function CarouselP({ products }) {
       items: 3,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 }, 
+      breakpoint: { max: 464, min: 0 },
       items: 2,
     },
   };
   return (
-    <div style={{marginBottom:"30px"}}>
-    <Divider />
+    <div style={{ marginBottom: "30px" }}>
+      <Divider />
       <h3>PRODUCTOS EN OFERTA</h3>
-    
-        <Carousel responsive={responsive}  >
-          {products.map((product) => (
-            <Card
-              style={{height:"100%", maxWidth:"450px", margin:"auto 0.5rem", justifyContent:"center", alignItems:"center"}}
-              
-              cover={
-                <img
-                  style={{ height:"100%" }}
-                  src={product.img}
-                  alt={product.title}
-                />
-              }
-            >
-              <Meta title={product.title} />
 
-              <p>${product.price}</p>
-              {product.stock > 0 ? <Tag>SIN STOCK</Tag> : null}
-            </Card>
-          ))}
-        </Carousel>
-        </div>
-    
+      <Carousel responsive={responsive}>
+        {products.map((product) => (
+          <CardCarousel product={product} />
+        ))}
+      </Carousel>
+    </div>
   );
 }
 
