@@ -1,12 +1,12 @@
-import { Card, Tag } from "antd";
-import Meta from "antd/es/card/Meta";
+
 import React, { useState } from "react";
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+
 import Products from "../ProductsJSON";
 import "./Product.css";
 import FilterProducts from "../FilterProducts/FilterProducts";
 import Carousel from "../Carousel/Carousel";
 import ProductCard from "../ProductCard/ProductCard";
+import { FloatButton } from 'antd';
 
 function Product() {
   const productsOffer = [...Products].sort((a, b) => a.price - b.price);
@@ -43,6 +43,7 @@ function Product() {
         ))}
       </div>
       <Carousel products={productsOffer} />
+      <FloatButton.BackTop  />
     </div>
   );
 }

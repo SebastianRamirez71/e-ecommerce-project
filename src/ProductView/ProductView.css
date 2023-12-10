@@ -1,0 +1,19 @@
+/* Celular*/
+@media (max-width: 560px) {
+  .container-product {
+    width: 350px;
+  }
+  .card-product {
+    display: grid;
+  }
+}
+
+@media (min-width: 560px) {
+  .container-product {
+    width: 500px;
+  }
+  .card-product {
+    display: flex;
+    justify-content: center;
+  }
+}

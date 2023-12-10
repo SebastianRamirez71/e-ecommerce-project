@@ -16,11 +16,10 @@ function NavBar() {
   };
   return (
     <div
-    className="navBar"
+      className="navBar"
       style={{
         height: "100%",
         display: "flex",
-
       }}
     >
       <Row
@@ -34,7 +33,7 @@ function NavBar() {
               setOpenMenu(true);
             }}
           />
-          <span style={{ fontSize: 20, marginLeft: 5 }}>INICIO</span>
+         
         </Col>
 
         <Col flex="0 1 50px" style={{ display: "flex" }}>
@@ -47,7 +46,7 @@ function NavBar() {
         </Col>
       </Row>
 
-      <div className="headerMenu" style={{ maxWidth:"980px"}}>
+      <div className="headerMenu" style={{ maxWidth: "980px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <AppMenu />
         </div>
@@ -90,22 +89,21 @@ function AppMenu({ isInLine = false }) {
           {isInLine ? null : (
             <Search
               placeholder="Buscar"
-              style={{  borderColor: "black", width:200 }}
+              style={{ borderColor: "black", width: 200 }}
             />
           )}
         </Col>
         <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>
-        <Link to={"/home"}>
-          <Image
-            width={350}
-            preview={false}
-            
-            src={
-              isInLine
-                ? ""
-                : "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/274/538/themes/common/logo-1912741912-1692334118-ade6bc1eae5bf162bf182280d8cfcb781692334118-480-0.png?0"
-            }
-          />
+          <Link to={"/home"}>
+            <Image
+              width={350}
+              preview={false}
+              src={
+                isInLine
+                  ? ""
+                  : "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/274/538/themes/common/logo-1912741912-1692334118-ade6bc1eae5bf162bf182280d8cfcb781692334118-480-0.png?0"
+              }
+            />
           </Link>
         </Col>
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
@@ -115,7 +113,7 @@ function AppMenu({ isInLine = false }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{marginLeft:"30px"}}>
+            <div style={{ marginLeft: "30px" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
               <Button>Iniciar Sesion</Button>
             </div>

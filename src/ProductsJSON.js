@@ -10,7 +10,7 @@ const Products = [
     title: "Bermuda Hielfer",
     category:"down",
     price: 11200,
-    stock: 10,
+    stock: 4,
     sizes: ["S", "XL"],
   },
   {
