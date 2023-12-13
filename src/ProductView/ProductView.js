@@ -21,7 +21,9 @@ import {
 import "./ProductView.css";
 function ProductView() {
   const location = useLocation();
-  const { product } = location.state;
+  console.log(location.state)
+  const { imgS, stock, id, price, title, sizes } = location.state;
+
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onChange = (e) => {
@@ -35,13 +37,13 @@ function ProductView() {
   };
 
   const handleIncrease = () => {
-    if (quantity < product.stock) {
+    if (quantity < stock) {
       setQuantity(quantity + 1);
     }
   };
 
   const handleInputChange = (value) => {
-    if (value >= 1 && value <= product.stock) {
+    if (value >= 1 && value <= stock) {
       setQuantity(value);
     }
   };
@@ -69,7 +71,7 @@ function ProductView() {
           <div style={{  justifyContent: "center" }} className="card-product">
             <div  className="container-product">
               <Carousel autoplay>
-                {product.imgS.map((img, index) => (
+                {imgS.map((img, index) => (
                   <div key={index}>
                     <Image
                       src={img}
@@ -90,8 +92,8 @@ function ProductView() {
                 textAlign: "start",
               }}
             >
-              <Meta title={product.title} style={{ fontSize: 31 }} />
-              <p style={{ fontSize: 31 }}>${product.price}</p>
+              <Meta title={title} style={{ fontSize: 31 }} />
+              <p style={{ fontSize: 31 }}>${price}</p>
               <div>
                 <CreditCardOutlined />
                 <a
@@ -115,12 +117,12 @@ function ProductView() {
                   />
                 </Modal>
               </div>
-              {product.stock < 1 ? <Tag>SIN STOCK</Tag> : null}
+              {stock < 1 ? <Tag>SIN STOCK</Tag> : null}
               <Divider />
               <p>Talle</p>
               <Radio.Group onChange={onChange}>
-                {product.sizes.map((size) =>
-                  product.stock < 1 ? (
+                {sizes.map((size) =>
+                  stock < 1 ? (
                     <Radio.Button value={size} disabled>
                       {size}
                     </Radio.Button>
@@ -129,7 +131,7 @@ function ProductView() {
                   )
                 )}
               </Radio.Group>
-              {product.stock > 0 ? (
+              {stock > 0 ? (
                 <div style={{ marginTop: "20px", textAlign: "start" }}>
                   <MinusOutlined
                     onClick={handleDecrease}
@@ -139,7 +141,7 @@ function ProductView() {
                     value={quantity}
                     onChange={handleInputChange}
                     style={{ width: "40px", textAlign: "center" }}
-                    max={product.stock}
+                    max={stock}
                     controls={false}
                   />
                   <PlusOutlined

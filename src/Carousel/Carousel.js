@@ -31,9 +31,20 @@ function CarouselP({ products }) {
       <h3>PRODUCTOS EN OFERTA</h3>
 
       <Carousel responsive={responsive}>
-        {products.map((product) => (
-          <CardCarousel product={product} />
-        ))}
+        {products.map(
+          ({ id, title, img, stock, price, imgS, product, sizes }) => (
+            <CardCarousel
+              id={id}
+              title={title}
+              img={img}
+              imgS={imgS}
+              stock={stock}
+              price={price}
+              product={product}
+              sizes={sizes}
+            />
+          )
+        )}
       </Carousel>
     </div>
   );
