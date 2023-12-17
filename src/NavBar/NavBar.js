@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { App, Button, Col, Drawer, Image, Menu, Row, Space } from "antd";
 import { Input } from "antd";
-import { MenuOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  MenuOutlined,
+  SearchOutlined,
+  ShoppingCartOutlined,
+} from "@ant-design/icons";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import SearchProducts from "../SearchProducts/SearchProducts";
 
 const { Search } = Input;
 
-function NavBar() {
+function NavBar({products}) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [size, setSize] = useState("large");
@@ -33,7 +38,6 @@ function NavBar() {
               setOpenMenu(true);
             }}
           />
-         
         </Col>
 
         <Col flex="0 1 50px" style={{ display: "flex" }}>
@@ -48,7 +52,7 @@ function NavBar() {
 
       <div className="headerMenu" style={{ maxWidth: "980px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <AppMenu />
+          <AppMenu products={products} />
         </div>
       </div>
 
@@ -73,7 +77,7 @@ function NavBar() {
   );
 }
 
-function AppMenu({ isInLine = false }) {
+function AppMenu({ isInLine = false, products }) {
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -87,7 +91,8 @@ function AppMenu({ isInLine = false }) {
       <Row align="middle" justify={isInLine ? "center" : ""}>
         <Col xs={isInLine ? 12 : 8}>
           {isInLine ? null : (
-            <Button style={{marginRight:"0px"}}>Mis Ordenes</Button>
+            // SEARCH
+            <SearchProducts products={products} />
           )}
         </Col>
         <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>
@@ -110,7 +115,7 @@ function AppMenu({ isInLine = false }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{ marginLeft: "90px", display:"flex" }}>
+            <div style={{ marginLeft: "90px", display: "flex" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
               <Button>Iniciar Sesion</Button>
             </div>

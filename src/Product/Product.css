@@ -11,6 +11,9 @@
     margin: 0 auto;
     width: 350px;
   }
+  .container{
+    max-width: 780px;
+  }
   
   
 }
