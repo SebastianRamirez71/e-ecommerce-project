@@ -22,7 +22,7 @@ import "./ProductView.css";
 function ProductView() {
   const location = useLocation();
   console.log(location.state)
-  const { imgS, stock, id, price, title, sizes } = location.state;
+  const { imgS, stock,price, title, sizes } = location.state;
 
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);

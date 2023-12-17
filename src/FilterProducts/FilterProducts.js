@@ -9,19 +9,18 @@ function FilterProducts({ onFilterChange }) {
   };
 
   return (
-    <div style={{display:"flex", justifyContent:"start", marginBottom:"1em"}}>
+    <div
+      style={{ display: "flex", justifyContent: "start", marginBottom: "1em" }}
+    >
       <Select
         defaultValue="Filtrar"
-
         style={{ width: 150 }}
         onChange={handleChange}
       >
-
         <Option value="lowToHigh">Precio más bajo</Option>
-        <Option value="highToLow">Precio más alto</Option>
         <Option value="stock">Disponible</Option>
+        <Option value="highToLow">Precio más alto</Option>
       </Select>
-      
     </div>
   );
 }

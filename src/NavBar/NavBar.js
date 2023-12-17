@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { App, Button, Col, Drawer, Image, Menu, Row, Space } from "antd";
 import { Input } from "antd";
-import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 
@@ -87,16 +87,13 @@ function AppMenu({ isInLine = false }) {
       <Row align="middle" justify={isInLine ? "center" : ""}>
         <Col xs={isInLine ? 12 : 8}>
           {isInLine ? null : (
-            <Search
-              placeholder="Buscar"
-              style={{ borderColor: "black", width: 200 }}
-            />
+            <Button style={{marginRight:"0px"}}>Mis Ordenes</Button>
           )}
         </Col>
         <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>
           <Link to={"/home"}>
             <Image
-              width={350}
+              width={320}
               preview={false}
               src={
                 isInLine
@@ -113,7 +110,7 @@ function AppMenu({ isInLine = false }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{ marginLeft: "30px" }}>
+            <div style={{ marginLeft: "90px", display:"flex" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
               <Button>Iniciar Sesion</Button>
             </div>

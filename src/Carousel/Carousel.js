@@ -1,11 +1,12 @@
 import React from "react";
-import { Card, Divider, Tag } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Divider } from "antd";
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardCarousel from "../ProductCard/CardCarouse";
 
 function CarouselP({ products }) {
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -25,6 +26,7 @@ function CarouselP({ products }) {
       items: 2,
     },
   };
+
   return (
     <div style={{ marginBottom: "30px" }}>
       <Divider />
@@ -34,6 +36,7 @@ function CarouselP({ products }) {
         {products.map(
           ({ id, title, img, stock, price, imgS, product, sizes }) => (
             <CardCarousel
+            key={id}
               id={id}
               title={title}
               img={img}
