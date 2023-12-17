@@ -40,7 +40,7 @@ function App() {
     },
     {
       path: "/product/:id",
-      element: <ProductView products={products} />,
+      element: <ProductView products={products} loading={loading} />,
     },
   ]);
 
