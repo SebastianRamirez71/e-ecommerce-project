@@ -12,13 +12,16 @@ import SearchProducts from "../SearchProducts/SearchProducts";
 
 const { Search } = Input;
 
-function NavBar({products}) {
+function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [size, setSize] = useState("large");
   const onClose = () => {
     setOpenSearch(false);
   };
+
+  
+  
   return (
     <div
       className="navBar"
@@ -52,7 +55,8 @@ function NavBar({products}) {
 
       <div className="headerMenu" style={{ maxWidth: "980px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <AppMenu products={products} />
+          <AppMenu  products={products} 
+            />
         </div>
       </div>
 
@@ -77,7 +81,8 @@ function NavBar({products}) {
   );
 }
 
-function AppMenu({ isInLine = false, products }) {
+function AppMenu({ isInLine = false, products}) {
+  
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -91,8 +96,22 @@ function AppMenu({ isInLine = false, products }) {
       <Row align="middle" justify={isInLine ? "center" : ""}>
         <Col xs={isInLine ? 12 : 8}>
           {isInLine ? null : (
-            // SEARCH
-            <SearchProducts products={products} />
+           <div>
+             {products.map((product, id, title, stock, img, imgS, price, sizes) => (
+                <SearchProducts
+                  key={id}
+                  id={id}
+                  title={title}
+                  img={img}
+                  imgS={imgS}
+                  stock={stock}
+                  price={price}
+                  sizes={sizes}
+                  product={product}
+                  products={products}
+                />
+              ))}
+           </div>
           )}
         </Col>
         <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>

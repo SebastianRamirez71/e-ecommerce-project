@@ -56,7 +56,7 @@ function Product({ clothes }) {
                 className="col-6 col-sm-6 col-md-6 col-lg-6"
                 style={{ marginBottom: "15px" }}
               >
-                <ProductCard
+                <ProductCard  
                   key={id}
                   id={id}
                   title={title}
