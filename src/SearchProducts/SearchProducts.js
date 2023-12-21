@@ -1,19 +1,42 @@
 import React, { useState } from "react";
 import { Avatar, Input, List } from "antd";
-import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import "./SearchProducts.css"
 const { Search } = Input;
 
-const SearchProducts = ({ products, id, title, img, stock, price, imgS, product, sizes }) => {
+const SearchProducts = ({ products }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = products
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  const toDescription = (productId) => {
+    const selectedProduct = products.find(
+      (product) => product.id === productId
+    );
+
+    if (selectedProduct) {
+      navigate(`/product/${productId}`, {
+        state: {
+          id: selectedProduct.id,
+          title: selectedProduct.title,
+          img: selectedProduct.img,
+          stock: selectedProduct.stock,
+          price: selectedProduct.price,
+          imgS: selectedProduct.imgS,
+          sizes: selectedProduct.sizes,
+        },
+      });
+    }
+  };
 
   return (
     <div
@@ -37,17 +60,18 @@ const SearchProducts = ({ products, id, title, img, stock, price, imgS, product,
         <List
           dataSource={filteredProducts}
           renderItem={(product) => (
-            <Link
-          to={`/product/${id}`}
-          state={{ product, imgS, title, stock, price, img, id, sizes }}>
-            <List.Item key={id}>
+            <List.Item
+              style={{ cursor: "pointer" }}
+              key={product.id}
+              onClick={() => toDescription(product.id)}
+              className="hover-effect"  // Agregamos una clase CSS para el efecto de hover
+            >
               <List.Item.Meta
-                avatar={<Avatar shape="square" size={56} src={img} />}
-                title={title}
-                description={` $${price}`}
+                avatar={<Avatar shape="square" size={56} src={product.img} />}
+                title={product.title}
+                description={` $${product.price}`}
               />
             </List.Item>
-            </Link>
           )}
         />
       )}

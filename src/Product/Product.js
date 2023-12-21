@@ -5,12 +5,11 @@ import Carousel from "../Carousel/Carousel";
 import ProductCard from "../ProductCard/ProductCard";
 import { FloatButton } from "antd";
 
+
 function Product({ clothes }) {
-  
   useEffect(() => {
     setFilteredProducts(clothes);
   }, [clothes]);
-
 
   const productsOffer = [...clothes].sort((a, b) => a.price - b.price);
   const [filteredProducts, setFilteredProducts] = useState(clothes);
@@ -30,11 +29,8 @@ function Product({ clothes }) {
     setFilteredProducts(sortedProducts);
   };
 
-
-
   return (
     <div className="container">
-
       <FilterProducts onFilterChange={handleFilterChange} />
 
       <div
@@ -56,7 +52,7 @@ function Product({ clothes }) {
                 className="col-6 col-sm-6 col-md-6 col-lg-6"
                 style={{ marginBottom: "15px" }}
               >
-                <ProductCard  
+                <ProductCard
                   key={id}
                   id={id}
                   title={title}
@@ -70,7 +66,7 @@ function Product({ clothes }) {
               </div>
             ))}
         </div>
-              
+
         <Carousel products={productsOffer} />
         <FloatButton.BackTop />
       </div>

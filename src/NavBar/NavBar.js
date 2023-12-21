@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import { App, Button, Col, Drawer, Image, Menu, Row, Space } from "antd";
+import { Button, Col, Drawer, Image, Menu, Row } from "antd";
 import { Input } from "antd";
-import {
-  MenuOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
@@ -20,8 +16,6 @@ function NavBar({ products }) {
     setOpenSearch(false);
   };
 
-  
-  
   return (
     <div
       className="navBar"
@@ -55,8 +49,7 @@ function NavBar({ products }) {
 
       <div className="headerMenu" style={{ maxWidth: "980px" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <AppMenu  products={products} 
-            />
+          <AppMenu products={products} />
         </div>
       </div>
 
@@ -81,8 +74,7 @@ function NavBar({ products }) {
   );
 }
 
-function AppMenu({ isInLine = false, products}) {
-  
+function AppMenu({ isInLine = false, products }) {
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -95,26 +87,17 @@ function AppMenu({ isInLine = false, products}) {
     >
       <Row align="middle" justify={isInLine ? "center" : ""}>
         <Col xs={isInLine ? 12 : 8}>
-          {isInLine ? null : (
-           <div>
-             {products.map((product, id, title, stock, img, imgS, price, sizes) => (
-                <SearchProducts
-                  key={id}
-                  id={id}
-                  title={title}
-                  img={img}
-                  imgS={imgS}
-                  stock={stock}
-                  price={price}
-                  sizes={sizes}
-                  product={product}
-                  products={products}
-                />
-              ))}
-           </div>
-          )}
+          {isInLine ? null : <SearchProducts products={products} />}
         </Col>
-        <Col xs={isInLine ? 24 : 8} style={{ textAlign: "center" }}>
+        <Col
+          xs={isInLine ? 24 : 8}
+          style={{
+            textAlign: "center",
+            width: 400,
+            alignContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Link to={"/home"}>
             <Image
               width={320}

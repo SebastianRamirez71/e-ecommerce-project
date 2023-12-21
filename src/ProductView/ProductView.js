@@ -22,10 +22,10 @@ import {
 import "./ProductView.css";
 function ProductView({ loading }) {
   const location = useLocation();
-  const { imgS, stock, price, title, sizes } = location.state;
+  const { imgS, stock, price, title, sizes } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+console.log(location.state.stock)
   const onChange = (e) => {
     console.log(`radio checked:${e.target.value}`);
   };
@@ -88,11 +88,11 @@ function ProductView({ loading }) {
               >
                 <div className="container-product">
                   <Carousel autoplay>
-                    {imgS.map((img, index) => (
-                      <div key={index}>
+                    {imgS.map((img, id) => (
+                      <div key={id}>
                         <Image
                           src={img}
-                          alt={`img${index}`}
+                          alt={`img${id}`}
                           style={{ width: "100%" }}
                         />
                       </div>
@@ -192,5 +192,4 @@ function ProductView({ loading }) {
     </>
   );
 }
-
 export default ProductView;
