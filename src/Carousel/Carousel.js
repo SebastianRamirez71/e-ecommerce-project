@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider } from "antd";
+
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -28,8 +28,8 @@ function CarouselP({ products }) {
   };
 
   return (
-    <div style={{ marginBottom: "30px" }}>
-      <Divider />
+    <div style={{ marginBottom: "10px", marginTop:"30px" }}>
+ 
       <h3>PRODUCTOS EN OFERTA</h3>
 
       <Carousel responsive={responsive}>
