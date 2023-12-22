@@ -20,7 +20,7 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import "./ProductView.css";
-function ProductView({ loading }) {
+function ProductView({ loading, products }) {
   const location = useLocation();
   const { imgS, stock, price, title, sizes } = location.state || {};
   const [quantity, setQuantity] = useState(1);
@@ -73,7 +73,7 @@ console.log(location.state.stock)
         </div>
       ) : (
         <div>
-          <NavBar />
+          <NavBar products={products} />
           <Category />
           <div className="container" style={{ justifyContent: "center" }}>
             <div

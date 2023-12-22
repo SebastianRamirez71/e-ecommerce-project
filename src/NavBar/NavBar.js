@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button, Col, Drawer, Image, Menu, Row } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { Avatar, Button, Col, Drawer, Image, List, Menu, Row } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 
 const { Search } = Input;
@@ -22,6 +22,7 @@ function NavBar({ products }) {
       style={{
         height: "100%",
         display: "flex",
+        justifyContent: "center",
       }}
     >
       <Row
@@ -39,7 +40,7 @@ function NavBar({ products }) {
 
         <Col flex="0 1 50px" style={{ display: "flex" }}>
           <SearchOutlined
-            style={{ fontSize: 35, marginRight: "5px" }}
+            style={{ fontSize: 35 }}
             onClick={() => {
               setOpenSearch(true);
             }}
@@ -47,7 +48,7 @@ function NavBar({ products }) {
         </Col>
       </Row>
 
-      <div className="headerMenu" style={{ maxWidth: "980px" }}>
+      <div className="headerMenu" style={{ justifyContent: "center" }}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <AppMenu products={products} />
         </div>
@@ -64,7 +65,7 @@ function NavBar({ products }) {
         <AppMenu isInLine />
       </Drawer>
       <Drawer
-        title={<SearchMenu />}
+        title={<SearchMenu products={products} />}
         placement="right"
         size={size}
         onClose={onClose}
@@ -83,6 +84,7 @@ function AppMenu({ isInLine = false, products }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        // Establecer altura mínima para ocupar la pantalla completa
       }}
     >
       <Row align="middle" justify={isInLine ? "center" : ""}>
@@ -100,7 +102,7 @@ function AppMenu({ isInLine = false, products }) {
         >
           <Link to={"/home"}>
             <Image
-              width={320}
+              width={330}
               preview={false}
               src={
                 isInLine
@@ -117,7 +119,7 @@ function AppMenu({ isInLine = false, products }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{ marginLeft: "90px", display: "flex" }}>
+            <div style={{ marginLeft: "120px", display: "flex" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
               <Button>Iniciar Sesion</Button>
             </div>
@@ -128,14 +130,109 @@ function AppMenu({ isInLine = false, products }) {
   );
 }
 
-function SearchMenu() {
+function SearchMenu({ products }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showList, setShowList] = useState(false);
+  const navigate = useNavigate();
+  const searchContainerRef = useRef(null);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    setShowList(!!e.target.value);
+  };
+
+  const handleItemClick = (productId) => {
+    toDescription(productId);
+    setShowList(false);
+  };
+
+  const toDescription = (productId) => {
+    const selectedProduct = products.find(
+      (product) => product.id === productId
+    );
+
+    if (selectedProduct) {
+      navigate(`/product/${productId}`, {
+        state: {
+          id: selectedProduct.id,
+          title: selectedProduct.title,
+          img: selectedProduct.img,
+          stock: selectedProduct.stock,
+          price: selectedProduct.price,
+          imgS: selectedProduct.imgS,
+          sizes: selectedProduct.sizes,
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(e.target)
+      ) {
+        setShowList(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const filteredProducts = products
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
   return (
-    <div style={{ display: "flex" }}>
+    <div
+      ref={searchContainerRef}
+      style={{ display: "flex", position: "relative", alignItems: "center" }}
+    >
       <Input
         placeholder="Buscar"
+        onChange={handleSearch}
         style={{ height: 40, color: "black", marginLeft: "auto" }}
       />
-      <SearchOutlined style={{ fontSize: 30, paddingLeft: "10px" }} />
+      {showList && searchQuery && (
+        <div
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            width: "100%",
+            backgroundColor: "#fff",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+            borderRadius: "4px",
+            zIndex: 1,
+          }}
+        >
+          <List
+            dataSource={filteredProducts}
+            renderItem={(product) => (
+              <List.Item
+                style={{ cursor: "pointer" }}
+                key={product.id}
+                onClick={() => handleItemClick(product.id)}
+                className="hover-effect"
+              >
+                <List.Item.Meta
+                  style={{ textAlign: "start" }}
+                  avatar={<Avatar shape="square" size={54} src={product.img} />}
+                  title={product.title}
+                  description={` $${product.price}`}
+                />
+              </List.Item>
+            )}
+          />
+        </div>
+      )}
+      <SearchOutlined style={{ fontSize: 30 }} />
     </div>
   );
 }

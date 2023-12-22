@@ -5,7 +5,6 @@ import Carousel from "../Carousel/Carousel";
 import ProductCard from "../ProductCard/ProductCard";
 import { FloatButton } from "antd";
 
-
 function Product({ clothes }) {
   useEffect(() => {
     setFilteredProducts(clothes);
@@ -30,7 +29,10 @@ function Product({ clothes }) {
   };
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      style={{ flexDirection: "column", alignItems: "center" }}
+    >
       <FilterProducts onFilterChange={handleFilterChange} />
 
       <div
@@ -38,7 +40,12 @@ function Product({ clothes }) {
           flexDirection: "column",
         }}
       >
-        <div className="row mr-auto">
+        <div
+          className="row mr-auto"
+          style={{
+            display: "flex",
+          }}
+        >
           {filteredProducts
             .filter(({ title }) =>
               title

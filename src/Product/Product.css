@@ -12,7 +12,9 @@
     width: 350px;
   }
   .container{
-    max-width: 820px;
+    max-width: 990px;
+    justify-content: center;
+    align-items: center;
   }
   
   
