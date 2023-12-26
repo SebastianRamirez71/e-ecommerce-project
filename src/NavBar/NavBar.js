@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Avatar, Button, Col, Drawer, Image, List, Menu, Row } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
-
+import { ThemeContext } from "../Services/theme/theme.context";
+import ToggleTheme from "../Services/theme/ToggleTheme";
 const { Search } = Input;
 
 function NavBar({ products }) {
@@ -16,6 +17,8 @@ function NavBar({ products }) {
     setOpenSearch(false);
   };
 
+  const {theme} = useContext(ThemeContext);
+  console.log(theme)
   return (
     <div
       className="navBar"
@@ -121,7 +124,7 @@ function AppMenu({ isInLine = false, products }) {
           ) : (
             <div style={{ marginLeft: "120px", display: "flex" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
-              <Button>Iniciar Sesion</Button>
+              <ToggleTheme />
             </div>
           )}
         </Col>
