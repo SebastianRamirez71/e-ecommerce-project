@@ -17,24 +17,11 @@ function NavBar({ products }) {
     setOpenSearch(false);
   };
 
-  const {theme} = useContext(ThemeContext);
-  console.log(theme)
+  const { theme } = useContext(ThemeContext);
+  console.log(theme);
   return (
-    <div
-      className="navBar"
-      style={{
-
-        display: "flex",
-        justifyContent:"space-around",
-        marginBottom:"30px",
-        marginTop:"30px",
-        alignItems:"center"
-      }}
-    >
-      <Row
-        style={{ paddingLeft: 12, paddingTop: 12, textAlign: "left" }}
-        className="menuIcon"
-      >
+    <div className="navBar">
+      <Row style={{ paddingLeft: 12, paddingTop: 12, textAlign: "left" }} className="menuIcon">
         <Col flex="1 1 200px">
           <MenuOutlined
             style={{ fontSize: 30 }}
@@ -54,8 +41,8 @@ function NavBar({ products }) {
         </Col>
       </Row>
 
-      <div className="headerMenu" style={{ justifyContent: "center" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className="headerMenu">
+        <div className="menuButtons">
           <AppMenu products={products} />
         </div>
       </div>
@@ -89,8 +76,6 @@ function AppMenu({ isInLine = false, products }) {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-       
       }}
     >
       <Row align="middle" justify={isInLine ? "center" : ""}>
@@ -101,13 +86,21 @@ function AppMenu({ isInLine = false, products }) {
           xs={isInLine ? 24 : 8}
           style={{
             textAlign: "center",
-            width: 400,
+            width: 900,
             alignContent: "center",
             alignItems: "center",
           }}
         >
           <Link to={"/home"}>
-            <h3 style={{color:"black", outlineColor:"black"}}>ORSO CLOTHES</h3>
+            <Image
+              width={200}
+              preview={false}
+              src={
+                isInLine
+                  ? ""
+                  : "https://acdn.mitiendanube.com/stores/001/137/436/themes/common/logo-940256125-1627572206-1c2970bac272936e49c05e2f165fdeb61627572207-480-0.webp"
+              }
+            />
           </Link>
         </Col>
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
@@ -117,9 +110,9 @@ function AppMenu({ isInLine = false, products }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{  display: "flex" }}>
+            <div style={{  justifyContent:"end" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
-              <ToggleTheme />
+              <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
             </div>
           )}
         </Col>

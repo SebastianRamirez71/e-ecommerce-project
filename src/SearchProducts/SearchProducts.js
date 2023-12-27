@@ -67,7 +67,6 @@ const SearchProducts = ({ products }) => {
     <div
       ref={searchContainerRef}
       style={{
-        backgroundColor: "white",
         display: "block",
         position: "absolute",
         left: 0,
