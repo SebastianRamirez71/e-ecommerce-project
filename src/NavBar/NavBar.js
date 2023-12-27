@@ -23,9 +23,12 @@ function NavBar({ products }) {
     <div
       className="navBar"
       style={{
-        height: "100%",
+
         display: "flex",
-        justifyContent: "center",
+        justifyContent:"space-around",
+        marginBottom:"30px",
+        marginTop:"30px",
+        alignItems:"center"
       }}
     >
       <Row
@@ -87,7 +90,7 @@ function AppMenu({ isInLine = false, products }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // Establecer altura mínima para ocupar la pantalla completa
+       
       }}
     >
       <Row align="middle" justify={isInLine ? "center" : ""}>
@@ -104,15 +107,7 @@ function AppMenu({ isInLine = false, products }) {
           }}
         >
           <Link to={"/home"}>
-            <Image
-              width={330}
-              preview={false}
-              src={
-                isInLine
-                  ? ""
-                  : "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/274/538/themes/common/logo-1912741912-1692334118-ade6bc1eae5bf162bf182280d8cfcb781692334118-480-0.png?0"
-              }
-            />
+            <h3 style={{color:"black", outlineColor:"black"}}>ORSO CLOTHES</h3>
           </Link>
         </Col>
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
@@ -122,7 +117,7 @@ function AppMenu({ isInLine = false, products }) {
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{ marginLeft: "120px", display: "flex" }}>
+            <div style={{  display: "flex" }}>
               <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
               <ToggleTheme />
             </div>

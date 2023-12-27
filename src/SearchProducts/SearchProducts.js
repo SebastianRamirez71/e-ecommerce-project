@@ -78,7 +78,7 @@ const SearchProducts = ({ products }) => {
         placeholder="Remera blanca"
         onChange={handleSearch}
         style={{
-          width: 220,
+          width: 170,
         }}
       />
 
