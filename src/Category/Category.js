@@ -9,6 +9,7 @@ function Category() {
         listStyleType: "none",
         textAlign: "center",
         marginBottom: "30px",
+        marginTop:"30px"
       }}
     >
       <Link to={"/home"} style={{color:"black"}}>

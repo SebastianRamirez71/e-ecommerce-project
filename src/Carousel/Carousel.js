@@ -30,7 +30,7 @@ function CarouselP({ products }) {
   return (
     <div style={{ marginBottom: "10px", marginTop:"30px" }}>
  
-      <h3>PRODUCTOS EN OFERTA</h3>
+      <h2>PRODUCTOS EN OFERTA</h2>
 
       <Carousel responsive={responsive}>
         {products.map(

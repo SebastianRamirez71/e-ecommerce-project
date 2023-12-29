@@ -119,6 +119,7 @@ console.log(location.state.stock)
                       Conoce las promociones
                     </a>
                     <Modal
+                    
                       title="Promociones y medios de pago"
                       open={isModalOpen}
                       onOk={handleOk}

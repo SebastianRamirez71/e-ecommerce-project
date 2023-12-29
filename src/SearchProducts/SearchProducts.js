@@ -68,6 +68,7 @@ const SearchProducts = ({ products }) => {
       ref={searchContainerRef}
       style={{
         display: "block",
+        background:"white",
         position: "absolute",
         left: 0,
         zIndex: 2000,
@@ -77,7 +78,7 @@ const SearchProducts = ({ products }) => {
         placeholder="Remera blanca"
         onChange={handleSearch}
         style={{
-          width: 170,
+          width: 220,
         }}
       />
 

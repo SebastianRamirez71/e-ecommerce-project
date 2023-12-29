@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Home";
 import ProductView from "./ProductView/ProductView";
 import { useEffect, useState } from "react";
+import SignUp from "./SignUp/SignUp";
 
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
       path: "/product/:id",
       element: <ProductView products={products} loading={loading} />,
     },
+    {
+      path:"/register",
+      element:<SignUp loading={loading} />
+    }
   ]);
 
   return (

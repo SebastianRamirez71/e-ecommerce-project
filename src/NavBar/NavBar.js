@@ -21,7 +21,10 @@ function NavBar({ products }) {
   console.log(theme);
   return (
     <div className="navBar">
-      <Row style={{ paddingLeft: 12, paddingTop: 12, textAlign: "left" }} className="menuIcon">
+      <Row
+        style={{ paddingLeft: 12, paddingTop: 12, textAlign: "left" }}
+        className="menuIcon"
+      >
         <Col flex="1 1 200px">
           <MenuOutlined
             style={{ fontSize: 30 }}
@@ -106,13 +109,19 @@ function AppMenu({ isInLine = false, products }) {
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
           {isInLine ? (
             <div>
-              <Button style={{ marginBottom: 8 }}>Crear Cuenta</Button>
+              <Link to={"/register"}>
+                <Button style={{ marginBottom: 8 }}>Crear Cuenta</Button>
+              </Link>
+
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
-            <div style={{  justifyContent:"end" }}>
-              <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
-              <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
+            <div style={{ justifyContent: "end" }}>
+              <Link to={"/register"}>
+                <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
+              </Link>
+
+              <Button style={{ marginRight: 8 }}>Iniciar Sesion</Button>
             </div>
           )}
         </Col>

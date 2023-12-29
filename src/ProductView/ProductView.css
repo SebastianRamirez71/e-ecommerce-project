@@ -1,4 +1,8 @@
 /* Celular*/
+.your-modal-class ::selection {
+  background-color: transparent;
+}
+
 @media (max-width: 560px) {
   .container-product {
     width: 350px;
