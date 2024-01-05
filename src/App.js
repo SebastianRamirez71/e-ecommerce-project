@@ -40,7 +40,7 @@ function App() {
       element: <Home products={products} loading={loading} />,
     },
     {
-      path: "/product/:id",
+      path: "/product/:title",
       element: <ProductView products={products} loading={loading} />,
     },
     {

@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import { ThemeContext } from "../Services/theme/theme.context";
 import ToggleTheme from "../Services/theme/ToggleTheme";
+import SignUp from "../SignUp/SignUp";
 const { Search } = Input;
 
 function NavBar({ products }) {
@@ -72,6 +73,9 @@ function NavBar({ products }) {
 }
 
 function AppMenu({ isInLine = false, products }) {
+  
+  const [modalShow, setModalShow] = useState(false);
+  
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -109,23 +113,31 @@ function AppMenu({ isInLine = false, products }) {
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
           {isInLine ? (
             <div>
-              <Link to={"/register"}>
-                <Button style={{ marginBottom: 8 }}>Crear Cuenta</Button>
-              </Link>
+              <Button
+                style={{ marginBottom: 8 }}
+                onClick={() => setModalShow(true)}
+              >
+                Crear Cuenta
+              </Button>
 
               <Button>Iniciar Sesion</Button>
             </div>
           ) : (
             <div style={{ justifyContent: "end" }}>
-              <Link to={"/register"}>
-                <Button style={{ marginRight: 8 }}>Crear Cuenta</Button>
-              </Link>
+              <Button
+                style={{ marginRight: 8 }}
+                onClick={() => setModalShow(true)}
+              >
+                Crear Cuenta
+              </Button>
 
               <Button style={{ marginRight: 8 }}>Iniciar Sesion</Button>
             </div>
           )}
         </Col>
       </Row>
+
+      <SignUp show={modalShow} onHide={() => setModalShow(false)} />
     </Menu>
   );
 }

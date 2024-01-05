@@ -64,44 +64,46 @@ const SearchProducts = ({ products }) => {
     : [];
 
   return (
-    <div
-      ref={searchContainerRef}
-      style={{
-        display: "block",
-        background:"white",
-        position: "absolute",
-        left: 0,
-        zIndex: 2000,
-      }}
-    >
-      <Search
-        placeholder="Remera blanca"
-        onChange={handleSearch}
+    <div style={{left:0, zIndex:200, position:"relative"}}>
+      <div
+        ref={searchContainerRef}
         style={{
-          width: 220,
+          display: "block",
+          background: "white",
+          position: "absolute",
+          left: 0,
+          zIndex: 2000,
         }}
-      />
-
-      {showList && searchQuery && (
-        <List
-          dataSource={filteredProducts}
-          renderItem={(product) => (
-            <List.Item
-              style={{ cursor: "pointer" }}
-              key={product.id}
-              onClick={() => handleItemClick(product.id)}
-              className="hover-effect"
-            >
-              <List.Item.Meta
-                style={{ textAlign: "start" }}
-                avatar={<Avatar shape="square" size={54} src={product.img} />}
-                title={product.title}
-                description={` $${product.price}`}
-              />
-            </List.Item>
-          )}
+      >
+        <Search
+          placeholder="Remera blanca"
+          onChange={handleSearch}
+          style={{
+            width: 220,
+          }}
         />
-      )}
+
+        {showList && searchQuery && (
+          <List
+            dataSource={filteredProducts}
+            renderItem={(product) => (
+              <List.Item
+                style={{ cursor: "pointer" }}
+                key={product.id}
+                onClick={() => handleItemClick(product.id)}
+                className="hover-effect"
+              >
+                <List.Item.Meta
+                  style={{ textAlign: "start" }}
+                  avatar={<Avatar shape="square" size={54} src={product.img} />}
+                  title={product.title}
+                  description={` $${product.price}`}
+                />
+              </List.Item>
+            )}
+          />
+        )}
+      </div>
     </div>
   );
 };

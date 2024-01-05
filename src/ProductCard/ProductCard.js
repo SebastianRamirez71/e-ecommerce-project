@@ -19,7 +19,7 @@ const ProductCard = ({
   const [hovered, setHovered] = useState(false);
 
   const toDescription = () => {
-    navigate(`/product/${id}`, {
+    navigate(`/product/${title}`, {
       state: {
         id,
         title,
@@ -35,7 +35,8 @@ const ProductCard = ({
 
   return (
     <Card
-      style={{ height: "100%" }}
+
+      style={{ height: "100%", width:330 }}
       className="cardProduct"
       onClick={toDescription}
       cover={
