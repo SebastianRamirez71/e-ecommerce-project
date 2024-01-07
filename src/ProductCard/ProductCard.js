@@ -14,7 +14,7 @@ const ProductCard = ({
   product,
   sizes,
 }) => {
-  console.log(id)
+  console.log(id);
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
 
@@ -35,15 +35,14 @@ const ProductCard = ({
 
   return (
     <Card
-
-      style={{ height: "100%", width:330 }}
+      style={{ height: "100%" }}
       className="cardProduct"
       onClick={toDescription}
       cover={
         <img
-        
           key={id}
-          style={{ cursor:"pointer",
+          style={{
+            cursor: "pointer",
             width: "100%",
             transition: "0.5s ease-in-out",
             transform: hovered ? "scale(1.01)" : "scale(1)",

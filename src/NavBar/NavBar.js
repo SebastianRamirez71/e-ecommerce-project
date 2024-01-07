@@ -73,9 +73,12 @@ function NavBar({ products }) {
 }
 
 function AppMenu({ isInLine = false, products }) {
-  
-  const [modalShow, setModalShow] = useState(false);
-  
+  const [open, setOpen] = useState(false);
+  const onCreate = (values) => {
+    console.log("Received values of form: ", values);
+    setOpen(false);
+  };
+
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -115,18 +118,22 @@ function AppMenu({ isInLine = false, products }) {
             <div>
               <Button
                 style={{ marginBottom: 8 }}
-                onClick={() => setModalShow(true)}
+                onClick={() => {
+                  setOpen(true);
+                }}
               >
                 Crear Cuenta
               </Button>
 
-              <Button>Iniciar Sesion</Button>
+              <Button >Iniciar Sesion</Button>
             </div>
           ) : (
             <div style={{ justifyContent: "end" }}>
               <Button
                 style={{ marginRight: 8 }}
-                onClick={() => setModalShow(true)}
+                onClick={() => {
+                  setOpen(true);
+                }}
               >
                 Crear Cuenta
               </Button>
@@ -137,7 +144,13 @@ function AppMenu({ isInLine = false, products }) {
         </Col>
       </Row>
 
-      <SignUp show={modalShow} onHide={() => setModalShow(false)} />
+      <SignUp
+        open={open}
+        onCreate={onCreate}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
     </Menu>
   );
 }
