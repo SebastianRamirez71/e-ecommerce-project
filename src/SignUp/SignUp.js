@@ -1,32 +1,50 @@
 import React from "react";
-import { Button, Form, Input, Modal, Radio } from "antd";
-import { useForm } from "antd/es/form/Form";
+import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import {app} from "../firebase"
+function SignUp({ open, onCancel }) {
+  const submitHandler = (e) => {
+     e.preventDefault();
+     const email = e.target.emailField.value;
+     const password = e.target.passwordField.value;
+     console.log(email, password);
 
-function SignUp({ open, onCreate, onCancel }) {
-  const [form] = useForm();
-
+    app.auth().createUserWithEmailAndPassword(email, password).then((usuarioFirebase)=> (
+      console.log("creado", usuarioFirebase)
+    ))
+  }
   return (
     <>
       <Modal
-        style={{ maxWidth: 290 }}
+        style={{
+          maxWidth: "100%",
+          justifyContent: "center",
+          textAlign: "center",
+          alignContent: "center",
+        }}
         open={open}
-        title="Crear cuenta"
+        title={
+          <>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <h5>Crear Cuenta</h5>
+              <UserOutlined style={{ fontSize: 24, alignItems: "center" }} />
+            </div>
+          </>
+        }
         footer={null}
         onCancel={onCancel}
         onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              onCreate(values);
-            })
-            .catch((info) => {
-              console.log("Validate Failed:", info);
-            });
+          //checkear
         }}
       >
         <Form
+        onSubmitCapture={submitHandler}
           name="basic"
           labelCol={{
             span: 8,
@@ -35,64 +53,62 @@ function SignUp({ open, onCreate, onCancel }) {
             span: 16,
           }}
           style={{
-            maxWidth: 290,
+            maxWidth: "100%",
           }}
           initialValues={{
             remember: true,
           }}
           autoComplete="off"
         >
-    
-          <UserOutlined />
-          <Form.Item
-            label="Usuario"
-            name="Usuario"
-            rules={[
-              {
-                required: true,
-                message: "Ingrese su usuario",
-              },
-            ]}
-          >
-            
-            <Input placeholder="Juan2002" />
-          </Form.Item>
-          <Form.Item
-            label="Email"
-            name="Email"
-            rules={[
-              {
-                required: true,
-                message: "Ingrese su Email",
-              },
-            ]}
-          >
-            <Input placeholder="youremail@gmail.com" />
-          </Form.Item>
+          <div style={{ alignContent: "center", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "start",
+                flexDirection: "column",
+                width: "100%",
+                marginBottom: 8,
+              }}
+            >
+              <label style={{ marginBottom: 0 }}>Usuario</label>
+              <Input placeholder="Juan2002" id="userFi" style={{ width: "100%" }} />
+            </div>
 
-          <Form.Item
-            label="Contraseña"
-            name="Contraseña"
-            rules={[
-              {
-                required: true,
-                message: "Ingrese su contraseña",
-              },
-            ]}
-          >
-            <Input.Password placeholder="12345" />
-          </Form.Item>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "start",
+                flexDirection: "column",
+                width: "100%",
+                marginBottom: 8,
+              }}
+            >
+              <label style={{ margin: 0 }}>Email:</label>
+              <Input
+              id="emailField"
+                placeholder="youremail@gmail.com"
+                style={{ width: "100%" }}
+              />
+            </div>
 
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "start",
+                flexDirection: "column",
+                width: "100%",
+                marginBottom: 8,
+              }}
+            >
+              <label style={{ margin: 0 }}>Contraseña:</label>
+              <Input.Password style={{ width: "100%" }} id="passwordField" />
+            </div>
+          </div>
+          <div style={{ textAlign: "center", marginTop: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-          </Form.Item>
+          </div>
         </Form>
       </Modal>
     </>

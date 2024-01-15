@@ -1,25 +1,22 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState } from "react";
 import { Avatar, Button, Col, Drawer, Image, List, Menu, Row } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
-import { ThemeContext } from "../Services/theme/theme.context";
-import ToggleTheme from "../Services/theme/ToggleTheme";
 import SignUp from "../SignUp/SignUp";
-const { Search } = Input;
+
 
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
-  const [size, setSize] = useState("large");
+  const [size] = useState("large");
   const onClose = () => {
     setOpenSearch(false);
   };
 
-  const { theme } = useContext(ThemeContext);
-  console.log(theme);
+
   return (
     <div className="navBar">
       <Row

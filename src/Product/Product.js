@@ -12,7 +12,7 @@ function Product({ clothes }) {
 
   const productsOffer = [...clothes].sort((a, b) => a.price - b.price);
   const [filteredProducts, setFilteredProducts] = useState(clothes);
-  const [searchText, setSearchText] = useState("");
+  const [searchText] = useState("");
 
   const handleFilterChange = (filterType) => {
     let sortedProducts = [];
@@ -41,7 +41,7 @@ function Product({ clothes }) {
         }}
       >
         <div
-          className="row mr-auto"
+          className="row"
           style={{
             display: "flex",
           }}

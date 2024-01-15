@@ -1,7 +1,6 @@
 import { Card, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({
@@ -14,7 +13,7 @@ const ProductCard = ({
   product,
   sizes,
 }) => {
-  console.log(id);
+
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
 
@@ -55,7 +54,7 @@ const ProductCard = ({
       }
     >
       <Meta title={title} />
-      <p>${price}</p>
+      <p style={{color:"ffff"}}>${price}</p>
       {stock < 1 ? <Tag>SIN STOCK</Tag> : null}
     </Card>
   );

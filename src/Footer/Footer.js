@@ -10,6 +10,16 @@ function Footer() {
         <h4>ENVIAMOS TU COMPRA</h4>
         <p>Entregas a todo el pais</p>
       </div>
+      <footer style={{fontSize:12}}>
+        <p>
+          Hecho con React, CSS y Ant Desing por {' '}
+          <a 
+          href="se.com"
+          target="_blank">
+          Sebastian Ramirez
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
