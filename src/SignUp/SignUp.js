@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import {app} from "../firebase"
-function SignUp({ open, onCancel }) {
-  const submitHandler = (e) => {
-     e.preventDefault();
-     const email = e.target.emailField.value;
-     const password = e.target.passwordField.value;
-     console.log(email, password);
+import { app } from "../firebase";
+function SignUp({ open, onCancel, setUser, isRegister }) {
+  console.log(isRegister);
+  const crearUsuario = (email, password) => {
+    console.log("vas a crear");
+    app
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((usuarioFirebase) => {
+        setUser(usuarioFirebase);
+      });
+  };
 
-    app.auth().createUserWithEmailAndPassword(email, password).then((usuarioFirebase)=> (
-      console.log("creado", usuarioFirebase)
-    ))
-  }
+  const iniciarSesion = (email, password) => {
+    console.log("iniciaste", email)
+    app
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((usuarioFirebase) => {
+        setUser(usuarioFirebase);
+      });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const email = e.target.emailField.value;
+    const password = e.target.passwordField.value;
+
+    if (isRegister) {
+      crearUsuario(email, password);
+    }
+
+    if (!isRegister) {
+      iniciarSesion(email, password);
+    }
+  };
   return (
     <>
       <Modal
@@ -32,7 +56,7 @@ function SignUp({ open, onCancel }) {
                 textAlign: "center",
               }}
             >
-              <h5>Crear Cuenta</h5>
+              <h5>{isRegister ? "Crear Cuenta" : "Iniciar Sesion"}</h5>
               <UserOutlined style={{ fontSize: 24, alignItems: "center" }} />
             </div>
           </>
@@ -44,7 +68,7 @@ function SignUp({ open, onCancel }) {
         }}
       >
         <Form
-        onSubmitCapture={submitHandler}
+          onSubmitCapture={submitHandler}
           name="basic"
           labelCol={{
             span: 8,
@@ -71,7 +95,11 @@ function SignUp({ open, onCancel }) {
               }}
             >
               <label style={{ marginBottom: 0 }}>Usuario</label>
-              <Input placeholder="Juan2002" id="userFi" style={{ width: "100%" }} />
+              <Input
+                placeholder="Juan2002"
+                id="userFi"
+                style={{ width: "100%" }}
+              />
             </div>
 
             <div
@@ -85,7 +113,7 @@ function SignUp({ open, onCancel }) {
             >
               <label style={{ margin: 0 }}>Email:</label>
               <Input
-              id="emailField"
+                id="emailField"
                 placeholder="youremail@gmail.com"
                 style={{ width: "100%" }}
               />

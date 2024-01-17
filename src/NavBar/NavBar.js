@@ -1,13 +1,24 @@
-import React, {useEffect, useRef, useState } from "react";
-import { Avatar, Button, Col, Drawer, Image, List, Menu, Row } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Avatar,
+  Button,
+  Col,
+  Drawer,
+  Dropdown,
+  Image,
+  List,
+  Menu,
+  Row,
+  Space,
+} from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
 import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import SignUp from "../SignUp/SignUp";
-
-
+import { app } from "../firebase";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -15,7 +26,6 @@ function NavBar({ products }) {
   const onClose = () => {
     setOpenSearch(false);
   };
-
 
   return (
     <div className="navBar">
@@ -70,12 +80,63 @@ function NavBar({ products }) {
 }
 
 function AppMenu({ isInLine = false, products }) {
+  const [user, setUser] = useState(); // estado para recibir el user desde signup
   const [open, setOpen] = useState(false);
-  const onCreate = (values) => {
-    console.log("Received values of form: ", values);
+  const [isRegister, setIsRegister] = useState();
+  useEffect(() => {
+    const unsubscribe = app.auth().onAuthStateChanged((usuarioFirebase) => {
+      if (usuarioFirebase) {
+        setUser(usuarioFirebase);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const onCreate = () => {
     setOpen(false);
   };
+  const singOut = () => {
+    console.log("has cerrado sesion");
+    app
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(null);
+      });
+  };
 
+  const items = [
+    {
+      label: (
+        <>
+          {!user ? (
+            <div style={{ flexDirection: "column", display: "flex" }}>
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  setIsRegister(true);
+                }}
+              >
+                Crear Sesion
+              </Button>
+              <Button
+                onClick={() => {
+                  setOpen(true);
+                  setIsRegister(false);
+                }}
+              >
+                Iniciar Sesion
+              </Button>
+            </div>
+          ) : (
+            <Button onClick={singOut}>Cerrar Sesion</Button>
+          )}
+        </>
+      ),
+      key: "0",
+    },
+  ];
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -113,35 +174,62 @@ function AppMenu({ isInLine = false, products }) {
         <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
           {isInLine ? (
             <div>
-              <Button
-                style={{ marginBottom: 8 }}
-                onClick={() => {
-                  setOpen(true);
-                }}
-              >
-                Crear Cuenta
-              </Button>
+              {user ? (
+                <div>
+                  <p>!Hola, bienvenido</p>
+                  <Button>Cerrar Sesion</Button>
+                </div>
+              ) : (
+                <>
+                  <Button
+                    style={{ marginBottom: 8 }}
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  >
+                    Crear Cuenta
+                  </Button>
 
-              <Button >Iniciar Sesion</Button>
+                  <Button
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  >
+                    Iniciar Sesion
+                  </Button>
+                </>
+              )}
             </div>
           ) : (
             <div style={{ justifyContent: "end" }}>
-              <Button
-                style={{ marginRight: 8 }}
-                onClick={() => {
-                  setOpen(true);
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                Crear Cuenta
-              </Button>
-
-              <Button style={{ marginRight: 8 }}>Iniciar Sesion</Button>
+                <Dropdown
+                  menu={{
+                    items,
+                  }}
+                >
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <UserOutlined style={{ fontSize: 25 }} />
+                    </Space>
+                  </a>
+                </Dropdown>
+              </div>
             </div>
           )}
         </Col>
       </Row>
 
       <SignUp
+        setIsRegister={setIsRegister}
+        isRegister={isRegister}
+        setUser={setUser}
         open={open}
         onCreate={onCreate}
         onCancel={() => {
