@@ -4,19 +4,17 @@ import { Divider } from "antd";
 function Footer() {
   return (
     <div>
-         <Divider />
+      <Divider />
       <div>
-        <ShoppingCartOutlined style={{fontSize:32}} />
+        <ShoppingCartOutlined style={{ fontSize: 32 }} />
         <h4>ENVIAMOS TU COMPRA</h4>
         <p>Entregas a todo el pais</p>
       </div>
-      <footer style={{fontSize:12}}>
+      <footer style={{ fontSize: 12 }}>
         <p>
-          Hecho con React, CSS y Ant Desing por {' '}
-          <a 
-          href="se.com"
-          target="_blank">
-          Sebastian Ramirez
+          Hecho con React, CSS y Firebase por {" "}
+          <a href="se.com" target="_blank">
+            Sebastian Ramirez
           </a>
         </p>
       </footer>

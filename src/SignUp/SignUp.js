@@ -3,8 +3,7 @@ import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { app } from "../firebase";
 function SignUp({ open, onCancel, setUser, isRegister }) {
-  console.log(isRegister);
-  const crearUsuario = (email, password) => {
+  const createUser = (email, password) => {
     console.log("vas a crear");
     app
       .auth()
@@ -14,8 +13,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
       });
   };
 
-  const iniciarSesion = (email, password) => {
-    console.log("iniciaste", email)
+  const LogIn = (email, password) => {
     app
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -30,11 +28,11 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
     const password = e.target.passwordField.value;
 
     if (isRegister) {
-      crearUsuario(email, password);
+      createUser(email, password);
     }
 
     if (!isRegister) {
-      iniciarSesion(email, password);
+      LogIn(email, password);
     }
   };
   return (

@@ -3,6 +3,7 @@ import {
   Avatar,
   Button,
   Col,
+  Divider,
   Drawer,
   Dropdown,
   Image,
@@ -19,6 +20,7 @@ import SearchProducts from "../SearchProducts/SearchProducts";
 import SignUp from "../SignUp/SignUp";
 import { app } from "../firebase";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import "../SearchProducts/SearchProducts.css";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -107,36 +109,71 @@ function AppMenu({ isInLine = false, products }) {
   };
 
   const items = [
-    {
-      label: (
-        <>
-          {!user ? (
-            <div style={{ flexDirection: "column", display: "flex" }}>
-              <Button
+    user
+      ? {
+          label: (
+            <div key="0">
+              <button
+                className="hover-effect"
+                onClick={singOut}
+                style={{
+                  border: "none",
+                  background: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Cerrar Sesión
+              </button>
+            </div>
+          ),
+          key: "0",
+        }
+      : {
+          label: (
+            <div key="0">
+              <button
+                className="hover-effect"
                 onClick={() => {
                   setOpen(true);
                   setIsRegister(true);
                 }}
+                style={{
+                  border: "none",
+                  background: "none",
+                  cursor: "pointer",
+                }}
               >
-                Crear Sesion
-              </Button>
-              <Button
+                Crear Sesión
+              </button>
+            </div>
+          ),
+          key: "0",
+        },
+    user
+      ? null
+      : {
+          label: (
+            <div key="1">
+              <button
+                className="hover-effect"
                 onClick={() => {
                   setOpen(true);
                   setIsRegister(false);
                 }}
+                style={{
+                  border: "none",
+                  background: "none",
+                  cursor: "pointer",
+                }}
               >
-                Iniciar Sesion
-              </Button>
+                Iniciar Sesión
+              </button>
             </div>
-          ) : (
-            <Button onClick={singOut}>Cerrar Sesion</Button>
-          )}
-        </>
-      ),
-      key: "0",
-    },
+          ),
+          key: "1",
+        },
   ];
+
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -177,7 +214,7 @@ function AppMenu({ isInLine = false, products }) {
               {user ? (
                 <div>
                   <p>!Hola, bienvenido</p>
-                  <Button>Cerrar Sesion</Button>
+                  <Button onClick={singOut}>Cerrar Sesion</Button>
                 </div>
               ) : (
                 <>
@@ -185,6 +222,7 @@ function AppMenu({ isInLine = false, products }) {
                     style={{ marginBottom: 8 }}
                     onClick={() => {
                       setOpen(true);
+                      setIsRegister(true);
                     }}
                   >
                     Crear Cuenta
@@ -193,6 +231,7 @@ function AppMenu({ isInLine = false, products }) {
                   <Button
                     onClick={() => {
                       setOpen(true);
+                      setIsRegister(false);
                     }}
                   >
                     Iniciar Sesion
