@@ -21,6 +21,7 @@ import SignUp from "../SignUp/SignUp";
 import { app } from "../firebase";
 import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
+import { hover } from "@testing-library/user-event/dist/hover";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -85,6 +86,8 @@ function AppMenu({ isInLine = false, products }) {
   const [user, setUser] = useState(); // estado para recibir el user desde signup
   const [open, setOpen] = useState(false);
   const [isRegister, setIsRegister] = useState();
+  const [hovered, setHovered] = useState(false);
+
   useEffect(() => {
     const unsubscribe = app.auth().onAuthStateChanged((usuarioFirebase) => {
       if (usuarioFirebase) {
@@ -255,7 +258,15 @@ function AppMenu({ isInLine = false, products }) {
                 >
                   <a onClick={(e) => e.preventDefault()}>
                     <Space>
-                      <UserOutlined style={{ fontSize: 25 }} />
+                      <UserOutlined
+                        onMouseOver={() => setHovered(true)}
+                        onMouseOut={() => setHovered(false)}
+                        style={{
+                          fontSize: 25,
+                          transition: "0.5s ease-in-out",
+                          transform: hovered ? "scale(1.1)" : "scale(1)",
+                        }}
+                      />
                     </Space>
                   </a>
                 </Dropdown>
