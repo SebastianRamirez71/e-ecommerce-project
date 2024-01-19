@@ -176,7 +176,7 @@ function AppMenu({ isInLine = false, products }) {
           key: "1",
         },
   ];
-
+  console.log(user);
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -216,7 +216,7 @@ function AppMenu({ isInLine = false, products }) {
             <div>
               {user ? (
                 <div>
-                  <p>!Hola, bienvenido</p>
+                  <p>Bienvenido</p>
                   <Button onClick={singOut}>Cerrar Sesion</Button>
                 </div>
               ) : (

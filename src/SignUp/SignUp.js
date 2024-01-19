@@ -31,6 +31,8 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
           alert("Operation not allowed.");
         } else if (error.code == "auth/weak-password") {
           errors.password = "Contraseña insegura";
+        } else {
+          errors.email = "Ingresaste";
         }
         setFormErrors(errors);
       });
@@ -42,6 +44,19 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
       .signInWithEmailAndPassword(email, password)
       .then((usuarioFirebase) => {
         setUser(usuarioFirebase);
+      })
+      .catch((error) => {
+        console.log(error);
+        const errors = { email: "", password: "", user: "" };
+        if (
+          error.code === "auth/invalid-credential" ||
+          error.code === "auth/wrong-password"
+        ) {
+          errors.email =
+            "El correo electrónico o la contraseña son incorrectos";
+        }
+
+        setFormErrors(errors);
       });
   };
 
@@ -147,6 +162,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
                 style={{ width: "100%" }}
                 onChange={(e) => setUserForm(e.target.value)}
               />
+              <div style={{ color: "red" }}>{formErrros.user}</div>
             </div>
 
             <div
@@ -166,6 +182,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
                 style={{ width: "100%" }}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <div style={{ color: "red" }}>{formErrros.email}</div>
             </div>
 
             <div
@@ -183,21 +200,15 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
                 id="passwordField"
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <div style={{ color: "red", marginBottom: "8px" }}>
+                {formErrros.password}
+              </div>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
-          </div>
-          <div style={{ color: "red", marginBottom: "8px" }}>
-            {formErrros.email}
-          </div>
-          <div style={{ color: "red", marginBottom: "8px" }}>
-            {formErrros.password}
-          </div>
-          <div style={{ color: "red", marginBottom: "8px" }}>
-            {formErrros.user}
           </div>
         </Form>
       </Modal>
