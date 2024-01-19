@@ -202,7 +202,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
               />
               <div style={{ color: "red", marginBottom: "8px" }}>
                 {formErrros.password}
-              </div>
+              </div>ne
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 8 }}>
