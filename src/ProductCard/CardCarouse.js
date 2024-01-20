@@ -29,7 +29,7 @@ function CardCarousel({ product, title, price, img, imgS, stock, id, sizes }) {
       }
     >
       <Link
-        to={`/product/${id}`}
+        to={`/product/${title}`}
         state={{ product, imgS, title, stock, price, img, id, sizes }}
       >
         <Meta title={title} />

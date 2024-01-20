@@ -25,7 +25,7 @@ function ProductView({ loading, products }) {
   const { imgS, stock, price, title, sizes } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-console.log(location.state.stock)
+
   const onChange = (e) => {
     console.log(`radio checked:${e.target.value}`);
   };
@@ -124,6 +124,7 @@ console.log(location.state.stock)
                       open={isModalOpen}
                       onOk={handleOk}
                       onCancel={handleCancel}
+                      footer={false}
                     >
                       <Divider />
                       <p>Promociones Bancarias</p>

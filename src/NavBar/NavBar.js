@@ -285,6 +285,8 @@ function AppMenu({ isInLine = false, products }) {
         onCancel={() => {
           setOpen(false);
         }}
+        setOpen={setOpen}
+        
       />
     </Menu>
   );

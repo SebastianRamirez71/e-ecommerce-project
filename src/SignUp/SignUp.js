@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { app } from "../firebase";
-function SignUp({ open, onCancel, setUser, isRegister }) {
+function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
   const [formErrros, setFormErrors] = useState({
     email: "",
     password: "",
@@ -13,23 +13,22 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
   const [password, setPassword] = useState("");
 
   const createUser = (email, password) => {
-    console.log("vas a crear");
     app
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((usuarioFirebase) => {
-        var user = usuarioFirebase.user;
         setUser(usuarioFirebase);
+        setOpen(false);
       })
       .catch((error) => {
         const errors = { email: "", password: "", user: "" };
-        if (error.code == "auth/email-already-in-use") {
+        if (error.code === "auth/email-already-in-use") {
           errors.email = "Ese email ya esta registrado";
-        } else if (error.code == "auth/invalid-email") {
+        } else if (error.code === "auth/invalid-email") {
           errors.email = "Ese email no es valido";
-        } else if (error.code == "auth/operation-not-allowed") {
+        } else if (error.code === "auth/operation-not-allowed") {
           alert("Operation not allowed.");
-        } else if (error.code == "auth/weak-password") {
+        } else if (error.code === "auth/weak-password") {
           errors.password = "Contraseña insegura";
         } else {
           errors.email = "Ingresaste";
@@ -43,6 +42,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((usuarioFirebase) => {
+        setOpen(false);
         setUser(usuarioFirebase);
       })
       .catch((error) => {
@@ -202,7 +202,7 @@ function SignUp({ open, onCancel, setUser, isRegister }) {
               />
               <div style={{ color: "red", marginBottom: "8px" }}>
                 {formErrros.password}
-              </div>ne
+              </div>
             </div>
           </div>
           <div style={{ textAlign: "center", marginTop: 8 }}>
