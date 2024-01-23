@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { app } from "../firebase";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+const auth = getAuth(app);
 function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
   const [formErrros, setFormErrors] = useState({
     email: "",
@@ -11,31 +18,36 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
   const [user, setUserForm] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const firestore = getFirestore(app);
 
-  const createUser = (email, password) => {
-    app
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((usuarioFirebase) => {
-        setUser(usuarioFirebase);
-        setOpen(false);
-      })
-      .catch((error) => {
-        const errors = { email: "", password: "", user: "" };
-        if (error.code === "auth/email-already-in-use") {
-          errors.email = "Ese email ya esta registrado";
-        } else if (error.code === "auth/invalid-email") {
-          errors.email = "Ese email no es valido";
-        } else if (error.code === "auth/operation-not-allowed") {
-          alert("Operation not allowed.");
-        } else if (error.code === "auth/weak-password") {
-          errors.password = "Contraseña insegura";
-        } else {
-          errors.email = "Ingresaste";
-        }
-        setFormErrors(errors);
-      });
-  };
+  // arreglar
+  async function createUser(email, password) {
+    try {
+      const infoUsuario = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setOpen(false);
+      console.log(infoUsuario.user.uid);
+      const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
+      setDoc(docuRef, { correo: email });
+    } catch (error) {
+      const errors = { email: "", password: "", user: "" };
+      if (error.code === "auth/email-already-in-use") {
+        errors.email = "Ese email ya está registrado";
+      } else if (error.code === "auth/invalid-email") {
+        errors.email = "Ese email no es válido";
+      } else if (error.code === "auth/operation-not-allowed") {
+        alert("Operación no permitida.");
+      } else if (error.code === "auth/weak-password") {
+        errors.password = "Contraseña débil";
+      } else {
+        errors.email = "Se produjo un error al ingresar";
+      }
+      setFormErrors(errors);
+    }
+  }
 
   const LogIn = (email, password) => {
     app

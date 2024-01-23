@@ -10,7 +10,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const PRODUCTS =
-    "https://657cb893853beeefdb99e17c.mockapi.io/api/v1/products";
+    "";
   useEffect(() => {
     setLoading(true);
     fetch(PRODUCTS, {

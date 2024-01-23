@@ -1,11 +1,5 @@
 .categories li{
     display: inline-block;
-    min-width: 5em;
+
     margin: 0 0.5em;
-}
-@media (max-width: 810px) {
-    .categories li:nth-child(3),
-    .categories li:nth-child(4) {
-      display: none;
-    }
 }

@@ -3,7 +3,6 @@ import {
   Avatar,
   Button,
   Col,
-  Divider,
   Drawer,
   Dropdown,
   Image,
@@ -19,9 +18,8 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import SignUp from "../SignUp/SignUp";
 import { app } from "../firebase";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
-import { hover } from "@testing-library/user-event/dist/hover";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -133,13 +131,15 @@ function AppMenu({ isInLine = false, products }) {
         }
       : {
           label: (
-            <div key="0">
+            <div
+              key="0"
+              onClick={() => {
+                setOpen(true);
+                setIsRegister(true);
+              }}
+            >
               <button
                 className="hover-effect"
-                onClick={() => {
-                  setOpen(true);
-                  setIsRegister(true);
-                }}
                 style={{
                   border: "none",
                   background: "none",
@@ -156,13 +156,15 @@ function AppMenu({ isInLine = false, products }) {
       ? null
       : {
           label: (
-            <div key="1">
+            <div
+              key="1"
+              onClick={() => {
+                setOpen(true);
+                setIsRegister(false);
+              }}
+            >
               <button
                 className="hover-effect"
-                onClick={() => {
-                  setOpen(true);
-                  setIsRegister(false);
-                }}
                 style={{
                   border: "none",
                   background: "none",
@@ -176,7 +178,6 @@ function AppMenu({ isInLine = false, products }) {
           key: "1",
         },
   ];
-  console.log(user);
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -243,7 +244,9 @@ function AppMenu({ isInLine = false, products }) {
               )}
             </div>
           ) : (
-            <div style={{ justifyContent: "end" }}>
+            <div
+              style={{ justifyContent: "center", display: "flex", gap: "15px" }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -262,14 +265,15 @@ function AppMenu({ isInLine = false, products }) {
                         onMouseOver={() => setHovered(true)}
                         onMouseOut={() => setHovered(false)}
                         style={{
-                          fontSize: 25,
-                          transition: "0.5s ease-in-out",
-                          transform: hovered ? "scale(1.1)" : "scale(1)",
+                          fontSize: 28,
                         }}
                       />
                     </Space>
                   </a>
                 </Dropdown>
+              </div>
+              <div>
+                <ShoppingCartOutlined style={{ fontSize: 28 }} />
               </div>
             </div>
           )}
@@ -286,12 +290,12 @@ function AppMenu({ isInLine = false, products }) {
           setOpen(false);
         }}
         setOpen={setOpen}
-        
       />
     </Menu>
   );
 }
 
+// Search product in MOBILE
 function SearchMenu({ products }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showList, setShowList] = useState(false);

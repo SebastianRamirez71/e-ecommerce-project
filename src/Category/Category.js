@@ -1,6 +1,6 @@
 import React from "react";
-import "./Category.css";
 import { Link } from "react-router-dom";
+
 function Category() {
   return (
     <ul
@@ -9,16 +9,18 @@ function Category() {
         listStyleType: "none",
         textAlign: "center",
         marginBottom: "30px",
-        marginTop:"30px"
+        marginTop: "30px",
+        justifyContent: "center",
+        display: "flex",
+        alignItems: "center",
+        padding: "0",
       }}
     >
-      <Link to={"/home"} style={{color:"black"}}>
-        <li color="black">INICIO</li>
+      <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>
+        <li style={{ margin: "0 15px" }}>INICIO</li>
       </Link>
-      <li>CARRITO</li>
-      <li>INFO</li>
-      <li>CONTACTO</li>
-      <li>INFO</li>
+      <li style={{ margin: "0 15px" }}>CONTACTO</li>
+      <li style={{ margin: "0 15px" }}>INFO</li>
     </ul>
   );
 }

@@ -119,7 +119,6 @@ function ProductView({ loading, products }) {
                       Conoce las promociones
                     </a>
                     <Modal
-                    
                       title="Promociones y medios de pago"
                       open={isModalOpen}
                       onOk={handleOk}
@@ -170,16 +169,25 @@ function ProductView({ loading, products }) {
                   ) : null}
                   <div
                     style={{
-                      padding: "10px",
                       display: "flex",
                       marginTop: "10px",
                     }}
                   >
-                    <ul style={{ textAlign: "start", margin: 0 }}>
-                      <h5>Descripcion</h5>
-                      <li>Adecuado para: Entrenamiento</li>
-                      <li>Material: Mix de materiales sintéticos</li>
-                      <li>Beneficios: Amortiguación</li>
+                    <ul
+                      style={{ listStyleType: "none", margin: 0, padding: 0 }}
+                    >
+                      <li style={{ marginBottom: "8px" }}>
+                        <h5 style={{ margin: 0 }}>Descripción</h5>
+                      </li>
+                      <li style={{ marginBottom: "4px" }}>
+                        Adecuado para: Entrenamiento
+                      </li>
+                      <li style={{ marginBottom: "4px" }}>
+                        Material: Mix de materiales sintéticos
+                      </li>
+                      <li style={{ marginBottom: "4px" }}>
+                        Beneficios: Amortiguación
+                      </li>
                       <li>
                         Composición: Capellada: Mesh y Sintético / Suela: Goma
                       </li>
