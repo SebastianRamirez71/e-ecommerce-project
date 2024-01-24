@@ -20,7 +20,7 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
   const [password, setPassword] = useState("");
   const firestore = getFirestore(app);
 
-  // arreglar
+
   async function createUser(email, password) {
     try {
       const infoUsuario = await createUserWithEmailAndPassword(
@@ -31,7 +31,7 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
       setOpen(false);
       console.log(infoUsuario.user.uid);
       const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
-      setDoc(docuRef, { correo: email });
+      setDoc(docuRef, { email: email });
     } catch (error) {
       const errors = { email: "", password: "", user: "" };
       if (error.code === "auth/email-already-in-use") {
@@ -48,6 +48,7 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
       setFormErrors(errors);
     }
   }
+
 
   const LogIn = (email, password) => {
     app
