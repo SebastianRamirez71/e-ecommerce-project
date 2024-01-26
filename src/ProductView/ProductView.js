@@ -20,11 +20,15 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import "./ProductView.css";
+import { useCart } from "../Hooks/userCart";
 function ProductView({ loading, products }) {
   const location = useLocation();
   const { imgS, stock, price, title, sizes } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToCart } = useCart();
+
+
 
   const onChange = (e) => {
     console.log(`radio checked:${e.target.value}`);
@@ -57,6 +61,7 @@ function ProductView({ loading, products }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       {loading ? (
@@ -164,7 +169,12 @@ function ProductView({ loading, products }) {
                         onClick={handleIncrease}
                         style={{ marginLeft: "3px", width: "15px" }}
                       />
-                      <Button style={{ marginLeft: "10px" }}>Agregar</Button>
+                      <Button
+                        style={{ marginLeft: "10px" }}
+                        onClick={() => addToCart(location.state)}
+                      >
+                        Agregar
+                      </Button>
                     </div>
                   ) : null}
                   <div

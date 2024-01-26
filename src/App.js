@@ -4,13 +4,13 @@ import Home from "./Home";
 import ProductView from "./ProductView/ProductView";
 import { useEffect, useState } from "react";
 import SignUp from "./SignUp/SignUp";
-
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const PRODUCTS =
-    "";
+    "https://657cb893853beeefdb99e17c.mockapi.io/api/v1/products";
   useEffect(() => {
     setLoading(true);
     fetch(PRODUCTS, {
@@ -44,14 +44,16 @@ function App() {
       element: <ProductView products={products} loading={loading} />,
     },
     {
-      path:"/register",
-      element:<SignUp loading={loading} />
-    }
+      path: "/register",
+      element: <SignUp loading={loading} />,
+    },
   ]);
 
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </div>
   );
 }

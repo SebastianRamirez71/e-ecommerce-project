@@ -28,6 +28,7 @@ const SearchProducts = ({ products }) => {
     if (selectedProduct) {
       navigate(`/product/${selectedProduct.title}`, {
         state: {
+          product: selectedProduct,
           id: selectedProduct.id,
           title: selectedProduct.title,
           img: selectedProduct.img,
@@ -64,7 +65,7 @@ const SearchProducts = ({ products }) => {
     : [];
 
   return (
-    <div style={{ left: 0, zIndex: 200, position: "relative" }}>
+    <div style={{ zIndex: 200, position: "relative" }} className="div-search">
       <div
         ref={searchContainerRef}
         style={{

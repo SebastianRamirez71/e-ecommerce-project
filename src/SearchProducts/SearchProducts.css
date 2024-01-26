@@ -4,3 +4,10 @@
     background-color: #c0bdbd; 
   }
   
+  @media (max-width: 986px) {
+    .div-search {
+      left: 50px;
+    }
+  }
+  
+  

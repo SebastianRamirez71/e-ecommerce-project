@@ -9,7 +9,7 @@ import {
   List,
   Menu,
   Row,
-  Space,
+
 } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
@@ -18,8 +18,9 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import SignUp from "../SignUp/SignUp";
 import { app } from "../firebase";
-import { UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
+import Cart from "../Cart/Cart";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -240,12 +241,18 @@ function AppMenu({ isInLine = false, products }) {
                   >
                     Iniciar Sesion
                   </Button>
+                  
                 </>
               )}
             </div>
           ) : (
             <div
-              style={{ justifyContent: "center", display: "flex", gap: "15px" }}
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                gap: "15px",
+                alignItems: "center", // Alinea los elementos verticalmente
+              }}
             >
               <div
                 style={{
@@ -260,20 +267,18 @@ function AppMenu({ isInLine = false, products }) {
                   }}
                 >
                   <a onClick={(e) => e.preventDefault()}>
-                    <Space>
-                      <UserOutlined
-                        onMouseOver={() => setHovered(true)}
-                        onMouseOut={() => setHovered(false)}
-                        style={{
-                          fontSize: 28,
-                        }}
-                      />
-                    </Space>
+                    <UserOutlined
+                      onMouseOver={() => setHovered(true)}
+                      onMouseOut={() => setHovered(false)}
+                      style={{
+                        fontSize: 28,
+                      }}
+                    />
                   </a>
                 </Dropdown>
               </div>
               <div>
-                <ShoppingCartOutlined style={{ fontSize: 28 }} />
+                <Cart />
               </div>
             </div>
           )}

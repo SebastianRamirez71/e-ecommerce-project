@@ -4,8 +4,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { app } from "../firebase";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 const auth = getAuth(app);
@@ -32,6 +31,9 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
       console.log(infoUsuario.user.uid);
       const docuRef = doc(firestore, `usuarios/${infoUsuario.user.uid}`);
       setDoc(docuRef, { email: email });
+      setUserForm("");
+      setEmail("");
+      setPassword("");
     } catch (error) {
       const errors = { email: "", password: "", user: "" };
       if (error.code === "auth/email-already-in-use") {
@@ -57,6 +59,9 @@ function SignUp({ open, onCancel, setUser, isRegister, setOpen }) {
       .then((usuarioFirebase) => {
         setOpen(false);
         setUser(usuarioFirebase);
+        setUserForm("");
+        setEmail("");
+        setPassword("");
       })
       .catch((error) => {
         console.log(error);

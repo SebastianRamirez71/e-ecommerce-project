@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cart from "../Cart/Cart";
+import { useMediaQuery } from "@mui/material";
 
 function Category() {
+  const isMobile = useMediaQuery("(max-width:600px)");
+
   return (
     <ul
       className="categories"
@@ -19,7 +23,8 @@ function Category() {
       <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>
         <li style={{ margin: "0 15px" }}>INICIO</li>
       </Link>
-      <li style={{ margin: "0 15px" }}>CONTACTO</li>
+      {isMobile ? <Cart isMobile={isMobile} /> : ""}
+      {isMobile ? "" : <li style={{ margin: "0 15px" }}>CONTACTO</li>}
       <li style={{ margin: "0 15px" }}>INFO</li>
     </ul>
   );
