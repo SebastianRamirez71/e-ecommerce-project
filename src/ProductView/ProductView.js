@@ -2,54 +2,20 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Category from "../Category/Category";
 import NavBar from "../NavBar/NavBar";
-import {
-  Button,
-  Carousel,
-  Divider,
-  Image,
-  InputNumber,
-  Modal,
-  Spin,
-  Tag,
-} from "antd";
+import { Carousel, Divider, Image, Modal, Spin, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Radio } from "antd";
-import {
-  CreditCardOutlined,
-  MinusOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { CreditCardOutlined } from "@ant-design/icons";
 import "./ProductView.css";
-import { useCart } from "../Hooks/userCart";
+import ButtonCustom from "../Button/ButtonCustom";
 function ProductView({ loading, products }) {
   const location = useLocation();
   const { imgS, stock, price, title, sizes } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { addToCart } = useCart();
-
-
 
   const onChange = (e) => {
     console.log(`radio checked:${e.target.value}`);
-  };
-
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const handleIncrease = () => {
-    if (quantity < stock) {
-      setQuantity(quantity + 1);
-    }
-  };
-
-  const handleInputChange = (value) => {
-    if (value >= 1 && value <= stock) {
-      setQuantity(value);
-    }
   };
 
   const showModal = () => {
@@ -153,29 +119,11 @@ function ProductView({ loading, products }) {
                     )}
                   </Radio.Group>
                   {stock > 0 ? (
-                    <div style={{ marginTop: "20px", textAlign: "start" }}>
-                      <MinusOutlined
-                        onClick={handleDecrease}
-                        style={{ marginRight: "3px", width: "15px" }}
-                      />
-                      <InputNumber
-                        value={quantity}
-                        onChange={handleInputChange}
-                        style={{ width: "40px", textAlign: "center" }}
-                        max={stock}
-                        controls={false}
-                      />
-                      <PlusOutlined
-                        onClick={handleIncrease}
-                        style={{ marginLeft: "3px", width: "15px" }}
-                      />
-                      <Button
-                        style={{ marginLeft: "10px" }}
-                        onClick={() => addToCart(location.state)}
-                      >
-                        Agregar
-                      </Button>
-                    </div>
+                    <ButtonCustom
+                      setQuantity={setQuantity}
+                      quantity={quantity}
+                      location={location.state}
+                    />
                   ) : null}
                   <div
                     style={{

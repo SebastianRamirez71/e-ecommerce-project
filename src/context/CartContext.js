@@ -1,30 +1,74 @@
-import { create } from "@mui/material/styles/createTransitions";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const addToCart = (product) => {
-    // ver si el producto ya esta en el carrito
-    const productInCart = cart.findIndex((item) => item.id === product.id);
-    if (productInCart >= 0) {
-      const newCart = structuredClone(cart);
+  const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
+  const [cart, setCart] = useState(storedCart);
+  const [countProducts, setCountProducts] = useState(0);
 
+  useEffect(() => {
+
+    localStorage.setItem("carrito", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
+    const productIndex = cart.findIndex((item) => item.id === product.id);
+
+    if (productIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[productIndex].quantity += 1;
+      setCart(updatedCart);
+    } else {
+      const newProduct = { ...product, quantity: 1 };
+      const newCart = [...cart, newProduct];
+      setCart(newCart);
     }
-    setCart((prevState) => [
-      ...prevState,
-      {
-        ...product
-      },
-    ]);
+
+    const totalQuantity = cart.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+    setCountProducts(totalQuantity);
   };
+
+  const clearProduct = (product) => {
+    const productIndex = cart.findIndex((item) => item.id === product.id);
+
+    if (productIndex !== -1) {
+      const updatedCart = [...cart];
+
+      if (cart[productIndex].quantity > 1) {
+        updatedCart[productIndex].quantity -= 1;
+      } else {
+        updatedCart.splice(productIndex, 1);
+      }
+
+      const totalQuantity = updatedCart.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      setCart(updatedCart);
+      setCountProducts(totalQuantity);
+    }
+  };
+
   const clearCart = () => {
     setCart([]);
+    setCountProducts(0);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        clearCart,
+        clearProduct,
+        countProducts,
+        setCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
