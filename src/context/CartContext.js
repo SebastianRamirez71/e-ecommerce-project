@@ -13,6 +13,8 @@ export function CartProvider({ children }) {
   }, [cart]);
 
   const addToCart = (product) => {
+    console.log("ASd")
+    console.log('Product:', product);
     const productIndex = cart.findIndex((item) => item.id === product.id);
 
     if (productIndex !== -1) {

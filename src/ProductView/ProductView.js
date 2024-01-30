@@ -10,12 +10,13 @@ import "./ProductView.css";
 import ButtonCustom from "../Button/ButtonCustom";
 function ProductView({ loading, products }) {
   const location = useLocation();
-  const { imgS, stock, price, title, sizes } = location.state || {};
+  const { imgS, stock, price, title, size } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [sizeSelected, setSizeSelected] = useState()
+console.log(sizeSelected)
   const onChange = (e) => {
-    console.log(`radio checked:${e.target.value}`);
+    setSizeSelected(e.target.value)
   };
 
   const showModal = () => {
@@ -108,7 +109,7 @@ function ProductView({ loading, products }) {
                   <Divider />
                   <p>Talle</p>
                   <Radio.Group onChange={onChange}>
-                    {sizes.map((size) =>
+                    {
                       stock < 1 ? (
                         <Radio.Button value={size} disabled>
                           {size}
@@ -116,13 +117,14 @@ function ProductView({ loading, products }) {
                       ) : (
                         <Radio.Button value={size}>{size}</Radio.Button>
                       )
-                    )}
+                    }
                   </Radio.Group>
                   {stock > 0 ? (
                     <ButtonCustom
                       setQuantity={setQuantity}
                       quantity={quantity}
                       location={location.state}
+                      sizeSelected={sizeSelected}
                     />
                   ) : null}
                   <div

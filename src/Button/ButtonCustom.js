@@ -1,20 +1,20 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, InputNumber } from "antd";
+import { Button } from "antd";
 import React from "react";
 import { useCart } from "../Hooks/userCart";
 
-function ButtonCustom({ location }) {
-
+function ButtonCustom({ location, sizeSelected }) {
   const { addToCart } = useCart();
 
   return (
-    <div style={{ marginTop: "20px", textAlign: "start" }}>
-      <Button
-
-        onClick={() => addToCart(location)}
-      >
-        Agregar
-      </Button>
+    <div style={{ textAlign: "start", marginTop: 10 }}>
+      {sizeSelected ? (
+        <Button onClick={() => addToCart(location)}>Agregar</Button>
+      ) : (
+        <Button disabled onClick={() => addToCart(location)}>
+          Agregar
+        </Button>
+      )}
     </div>
   );
 }

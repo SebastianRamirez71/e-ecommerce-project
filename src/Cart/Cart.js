@@ -8,8 +8,19 @@ import { Divider, Drawer, Space } from "antd";
 import React, { useEffect, useId, useState } from "react";
 import ButtonCustom from "../Button/ButtonCustom";
 import { useCart } from "../Hooks/userCart";
-
-function CarItem({ img, price, title, addToCart, clearProduct, quantity, id }) {
+import emptty from "./emptyCart.png";
+function CarItem({
+  img,
+  size,
+  price,
+  title,
+  addToCart,
+  clearProduct,
+  quantity,
+  id,
+  location,
+  sizeSelected,
+}) {
   return (
     <div
       className="container-items"
@@ -43,8 +54,9 @@ function CarItem({ img, price, title, addToCart, clearProduct, quantity, id }) {
         >
           <div>
             <p style={{ fontSize: 18, margin: 0 }}>{title}</p>
-            <p style={{ fontSize: 14, margin: 0 }}>Talle: L</p>
-            <p>{quantity}</p>
+            <p style={{ fontSize: 14, margin: 0 }}>Talle: {size}</p>
+
+            <p style={{ fontSize: 14, margin: 0 }}>Cantidad: {quantity}</p>
           </div>
           <DeleteOutlined style={{ fontSize: 18 }} onClick={clearProduct} />
         </div>
@@ -55,10 +67,9 @@ function CarItem({ img, price, title, addToCart, clearProduct, quantity, id }) {
             margin: 0,
             textAlign: "start",
             padding: "0 8px",
-            marginTop: 20,
           }}
         >
-          <ButtonCustom />
+          <ButtonCustom location={location} sizeSelected={sizeSelected} />
         </div>
       </div>
     </div>
@@ -68,11 +79,8 @@ function CarItem({ img, price, title, addToCart, clearProduct, quantity, id }) {
 function Cart({ isMobile }) {
   const cartCheckBoxId = useId();
   const [open, setOpen] = useState(false);
-  const { cart, clearCart, addToCart, clearProduct, setCart } =
-    useCart();
-
- 
-
+  const { cart, clearCart, addToCart, clearProduct, setCart } = useCart();
+  console.log(cart);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -113,15 +121,24 @@ function Cart({ isMobile }) {
               flexDirection: "column",
             }}
           >
-            {cart.map((product) => (
-              <CarItem
-                key={product.id}
-                addToCart={() => addToCart(product)}
-                clearProduct={() => clearProduct(product)}
-                quantity={product.quantity}
-                {...product}
-              />
-            ))}
+            {cart < 1 ? (
+              <>
+                <img src={emptty} />
+                <p style={{ textAlign: "center" }}>Su carrito esta vacio</p>
+              </>
+            ) : (
+              cart.map((product) => (
+                <CarItem
+                  key={product.id}
+                  addToCart={() => addToCart(product)}
+                  clearProduct={() => clearProduct(product)}
+                  quantity={product.quantity}
+                  location={product}
+                  sizeSelected={product.size}
+                  {...product}
+                />
+              ))
+            )}
           </div>
         </div>
       </Drawer>
