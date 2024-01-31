@@ -9,6 +9,7 @@ import React, { useEffect, useId, useState } from "react";
 import ButtonCustom from "../Button/ButtonCustom";
 import { useCart } from "../Hooks/userCart";
 import emptty from "./emptyCart.png";
+
 function CarItem({
   img,
   size,
@@ -21,6 +22,9 @@ function CarItem({
   location,
   sizeSelected,
 }) {
+
+  
+
   return (
     <div
       className="container-items"
@@ -69,7 +73,7 @@ function CarItem({
             padding: "0 8px",
           }}
         >
-          <ButtonCustom location={location} sizeSelected={sizeSelected} />
+          <ButtonCustom location={location} sizeSelected={sizeSelected}  />
         </div>
       </div>
     </div>
@@ -80,7 +84,7 @@ function Cart({ isMobile }) {
   const cartCheckBoxId = useId();
   const [open, setOpen] = useState(false);
   const { cart, clearCart, addToCart, clearProduct, setCart } = useCart();
-  console.log(cart);
+
   const showDrawer = () => {
     setOpen(true);
   };

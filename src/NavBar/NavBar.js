@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Avatar,
   Button,
@@ -9,7 +9,6 @@ import {
   List,
   Menu,
   Row,
-
 } from "antd";
 import { Input } from "antd";
 import { MenuOutlined, SearchOutlined } from "@ant-design/icons";
@@ -21,6 +20,7 @@ import { app } from "../firebase";
 import { UserOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
 import Cart from "../Cart/Cart";
+import { AuthenticationContext } from "../context/authentication.context";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -82,32 +82,13 @@ function NavBar({ products }) {
 }
 
 function AppMenu({ isInLine = false, products }) {
-  const [user, setUser] = useState(); // estado para recibir el user desde signup
   const [open, setOpen] = useState(false);
   const [isRegister, setIsRegister] = useState();
   const [hovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = app.auth().onAuthStateChanged((usuarioFirebase) => {
-      if (usuarioFirebase) {
-        setUser(usuarioFirebase);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
+  const { signOut, user } = useContext(AuthenticationContext);
 
   const onCreate = () => {
     setOpen(false);
-  };
-  const singOut = () => {
-    console.log("has cerrado sesion");
-    app
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(null);
-      });
   };
 
   const items = [
@@ -117,7 +98,7 @@ function AppMenu({ isInLine = false, products }) {
             <div key="0">
               <button
                 className="hover-effect"
-                onClick={singOut}
+                onClick={signOut}
                 style={{
                   border: "none",
                   background: "none",
@@ -219,7 +200,7 @@ function AppMenu({ isInLine = false, products }) {
               {user ? (
                 <div>
                   <p>Bienvenido</p>
-                  <Button onClick={singOut}>Cerrar Sesion</Button>
+                  <Button onClick={signOut}>Cerrar Sesion</Button>
                 </div>
               ) : (
                 <>
@@ -241,7 +222,6 @@ function AppMenu({ isInLine = false, products }) {
                   >
                     Iniciar Sesion
                   </Button>
-                  
                 </>
               )}
             </div>
@@ -288,7 +268,6 @@ function AppMenu({ isInLine = false, products }) {
       <SignUp
         setIsRegister={setIsRegister}
         isRegister={isRegister}
-        setUser={setUser}
         open={open}
         onCreate={onCreate}
         onCancel={() => {
