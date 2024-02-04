@@ -3,8 +3,11 @@ import "./App.css";
 import Home from "./Home";
 import ProductView from "./ProductView/ProductView";
 import { useEffect, useState } from "react";
-import SignUp from "./SignUp/SignUp";
+
 import { CartProvider } from "./context/CartContext";
+import CheckOut from "./CheckOut/CheckOut";
+import Protected from "./Button/routes/Protected";
+import { AuthenticationContextProvider } from "./context/authentication.context";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -44,16 +47,22 @@ function App() {
       element: <ProductView products={products} loading={loading} />,
     },
     {
-      path: "/register",
-      element: <SignUp loading={loading} />,
+      path: "/checkout",
+      element: (
+        <Protected>
+          <CheckOut loading={loading} />
+        </Protected>
+      ),
     },
   ]);
 
   return (
     <div className="App">
-      <CartProvider>
-        <RouterProvider router={router} />
-      </CartProvider>
+      <AuthenticationContextProvider>
+        <CartProvider>
+          <RouterProvider router={router} />
+        </CartProvider>
+      </AuthenticationContextProvider>
     </div>
   );
 }

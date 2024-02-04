@@ -3,6 +3,7 @@ import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { AuthenticationContext } from "../context/authentication.context";
+import { is } from "@react-spring/shared";
 
 function SignUp({ open, onCancel, isRegister, setOpen }) {
   const {
@@ -120,11 +121,12 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
               <label style={{ margin: 0 }}>Email:</label>
               <Input
                 type="email"
-                id="emailField"
-                placeholder="youremail@gmail.com"
+                id={isRegister ? "emailFieldRegister" : "emailFieldLogin"}
+                placeholder={isRegister ? "youremail@gmail.com" : ""}
                 style={{ width: "100%" }}
                 onChange={(e) => setEmail(e.target.value)}
               />
+
               <div style={{ color: "red" }}>{formErrors.email}</div>
             </div>
 
@@ -140,9 +142,10 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
               <label style={{ margin: 0 }}>Contraseña:</label>
               <Input.Password
                 style={{ width: "100%" }}
-                id="passwordField"
+                id={isRegister ? "passwordFieldRegister" : "passwordFieldLogin"}
                 onChange={(e) => setPassword(e.target.value)}
               />
+
               <div style={{ color: "red", marginBottom: "8px" }}>
                 {formErrors.password}
               </div>
@@ -154,14 +157,7 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
             </Button>
           </div>
         </Form>
-        <Toaster
-          containerStyle={{
-            top: 20,
-            left: 20,
-            bottom: 20,
-            right: 20,
-          }}
-        />
+        <Toaster />
       </Modal>
     </>
   );

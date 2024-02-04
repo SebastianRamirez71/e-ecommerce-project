@@ -13,6 +13,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(true);
   const [formErrors, setFormErrors] = useState({
     email: "",
     password: "",
@@ -25,6 +26,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = app.auth().onAuthStateChanged((usuarioFirebase) => {
+      setLoading(false);
       if (usuarioFirebase) {
         setUser(usuarioFirebase);
       }
@@ -100,7 +102,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         email,
       }}
     >
-      {children}
+      {!loading && children}
     </AuthenticationContext.Provider>
   );
 };

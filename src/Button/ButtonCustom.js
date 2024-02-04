@@ -9,11 +9,12 @@ function ButtonCustom({ location, sizeSelected }) {
   const notify = () =>
     toast("Se agrego un producto", {
       icon: "🛒",
+      position: "top-right",
     });
 
   const handleAddToCart = () => {
     addToCart(location);
-    notify(); 
+    notify();
   };
 
   return (
@@ -25,14 +26,7 @@ function ButtonCustom({ location, sizeSelected }) {
           Agregar
         </Button>
       )}
-      <Toaster
-        containerStyle={{
-          top: 20,
-          left: 20,
-          bottom: 20,
-          right: 20,
-        }}
-      />
+      <Toaster />
     </div>
   );
 }

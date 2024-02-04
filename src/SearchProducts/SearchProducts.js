@@ -35,7 +35,7 @@ const SearchProducts = ({ products }) => {
           stock: selectedProduct.stock,
           price: selectedProduct.price,
           imgS: selectedProduct.imgS,
-          sizes: selectedProduct.sizes,
+          size: selectedProduct.size,
         },
       });
     }

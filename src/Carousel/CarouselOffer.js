@@ -1,12 +1,10 @@
 import React from "react";
 
-
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import CardCarousel from "../ProductCard/CardCarouse";
 
-function CarouselP({ products }) {
-
+function CarouselOffer({ products }) {
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -28,15 +26,14 @@ function CarouselP({ products }) {
   };
 
   return (
-    <div style={{ marginBottom: "10px", marginTop:"30px" }}>
- 
+    <div style={{ marginBottom: "10px", marginTop: "30px" }}>
       <h2>PRODUCTOS EN OFERTA</h2>
 
       <Carousel responsive={responsive}>
         {products.map(
-          ({ id, title, img, stock, price, imgS, product, sizes }) => (
+          ({ id, title, img, stock, price, imgS, product, size }) => (
             <CardCarousel
-            key={id}
+              key={id}
               id={id}
               title={title}
               img={img}
@@ -44,7 +41,7 @@ function CarouselP({ products }) {
               stock={stock}
               price={price}
               product={product}
-              sizes={sizes}
+              size={size}
             />
           )
         )}
@@ -53,4 +50,4 @@ function CarouselP({ products }) {
   );
 }
 
-export default CarouselP;
+export default CarouselOffer;

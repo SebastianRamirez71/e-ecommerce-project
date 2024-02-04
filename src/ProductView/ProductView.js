@@ -8,15 +8,17 @@ import { Radio } from "antd";
 import { CreditCardOutlined } from "@ant-design/icons";
 import "./ProductView.css";
 import ButtonCustom from "../Button/ButtonCustom";
+import Footer from "../Footer/Footer";
+import CarouselOffer from "../Carousel/CarouselOffer";
 function ProductView({ loading, products }) {
   const location = useLocation();
   const { imgS, stock, price, title, size } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [sizeSelected, setSizeSelected] = useState()
-console.log(sizeSelected)
+  const [sizeSelected, setSizeSelected] = useState();
+
   const onChange = (e) => {
-    setSizeSelected(e.target.value)
+    setSizeSelected(e.target.value);
   };
 
   const showModal = () => {
@@ -109,15 +111,13 @@ console.log(sizeSelected)
                   <Divider />
                   <p>Talle</p>
                   <Radio.Group onChange={onChange}>
-                    {
-                      stock < 1 ? (
-                        <Radio.Button value={size} disabled>
-                          {size}
-                        </Radio.Button>
-                      ) : (
-                        <Radio.Button value={size}>{size}</Radio.Button>
-                      )
-                    }
+                    {stock < 1 ? (
+                      <Radio.Button value={size} disabled>
+                        {size}
+                      </Radio.Button>
+                    ) : (
+                      <Radio.Button value={size}>{size}</Radio.Button>
+                    )}
                   </Radio.Group>
                   {stock > 0 ? (
                     <ButtonCustom
@@ -157,6 +157,8 @@ console.log(sizeSelected)
               </div>
             </div>
           </div>
+
+          <Footer />
         </div>
       )}
     </>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Product.css";
 import FilterProducts from "../FilterProducts/FilterProducts";
-import Carousel from "../Carousel/Carousel";
+import CarouselOffer from "../Carousel/CarouselOffer";
 import ProductCard from "../ProductCard/ProductCard";
 import { FloatButton } from "antd";
 
@@ -74,7 +74,7 @@ function Product({ clothes }) {
             ))}
         </div>
 
-        <Carousel products={productsOffer} />
+        <CarouselOffer products={productsOffer} />
         <FloatButton.BackTop />
       </div>
     </div>

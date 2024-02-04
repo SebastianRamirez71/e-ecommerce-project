@@ -3,7 +3,7 @@ import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function CardCarousel({ product, title, price, img, imgS, stock, id, sizes }) {
+function CardCarousel({ product, title, price, img, imgS, stock, id, size }) {
   const [hovered, setHovered] = useState(false);
   return (
     <Card
@@ -30,12 +30,12 @@ function CardCarousel({ product, title, price, img, imgS, stock, id, sizes }) {
     >
       <Link
         to={`/product/${title}`}
-        state={{ product, imgS, title, stock, price, img, id, sizes }}
+        state={{ product, imgS, title, stock, price, img, id, size }}
       >
         <Meta title={title} />
       </Link>
       <p>${price}</p>
-      {stock > 0 ? <Tag>SIN STOCK</Tag> : null}
+      {stock < 1 ? <Tag>SIN STOCK</Tag> : null}
     </Card>
   );
 }
