@@ -76,7 +76,8 @@ const SearchProducts = ({ products }) => {
           zIndex: 2000,
         }}
       >
-        <Search
+        <Input
+          allowClear
           placeholder="Remera blanca"
           onChange={handleSearch}
           style={{

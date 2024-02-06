@@ -4,11 +4,11 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 
-import { Badge, Divider, Drawer, Space, Tooltip } from "antd";
+import { Divider, Drawer, Space, Tooltip } from "antd";
 import React, { useContext, useId, useState } from "react";
 import ButtonCustom from "../Button/ButtonCustom";
 import { useCart } from "../Hooks/userCart";
-import emptty from "./emptyCart.png";
+import emptySVG from "./Empty-cart.svg";
 import { Link } from "react-router-dom";
 import { AuthenticationContext } from "../context/authentication.context";
 
@@ -72,6 +72,7 @@ function CarItem({
               alignItems: "center",
               textAlign: "start",
               padding: "0 8px",
+              justifyContent: "space-between",
             }}
           >
             <ButtonCustom location={location} sizeSelected={sizeSelected} />
@@ -89,10 +90,8 @@ function CarItem({
 function Cart({ isMobile }) {
   const cartCheckBoxId = useId();
   const [open, setOpen] = useState(false);
-  const { cart, clearCart, addToCart, clearProduct, setCart } = useCart();
-  const [hovered, setHovered] = useState(false);
+  const { cart, clearCart, addToCart, clearProduct } = useCart();
   const { user } = useContext(AuthenticationContext);
-  console.log(user);
 
   const showDrawer = () => {
     setOpen(true);
@@ -153,8 +152,12 @@ function Cart({ isMobile }) {
           >
             {cart.length < 1 ? (
               <>
-                <img src={emptty} />
-                <p style={{ textAlign: "center" }}>Su carrito esta vacio</p>
+                
+                <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:8, textAlign:"center"}}>
+                  <img src={emptySVG} width={160} />
+                  <h5 style={{ textAlign: "center", fontSize:16 }}>Su carrito esta vacio</h5>
+                </div>
+                
               </>
             ) : (
               cart.map((product) => (
@@ -200,7 +203,7 @@ function Cart({ isMobile }) {
                     <p onClick={buyHandler}>COMPRAR</p>
                   </Link>
                 ) : (
-                  <Tooltip title="Inicia sesion para comprar">
+                  <Tooltip title="Inicia sesion para comprar" placement="left">
                     <p>COMPRAR</p>
                   </Tooltip>
                 )}

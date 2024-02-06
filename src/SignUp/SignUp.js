@@ -3,13 +3,12 @@ import { Button, Form, Input, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { AuthenticationContext } from "../context/authentication.context";
-import { is } from "@react-spring/shared";
+
 
 function SignUp({ open, onCancel, isRegister, setOpen }) {
   const {
     LogIn,
     createUser,
-    Toaster,
     formErrors,
     setFormErrors,
     email,
@@ -157,7 +156,6 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
             </Button>
           </div>
         </Form>
-        <Toaster />
       </Modal>
     </>
   );

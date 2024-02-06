@@ -242,6 +242,7 @@ function AppMenu({ isInLine = false, products }) {
                 }}
               >
                 <Dropdown
+                placement="bottom"
                   menu={{
                     items,
                   }}
@@ -363,6 +364,7 @@ function SearchMenu({ products }) {
           }}
         >
           <List
+          
             dataSource={filteredProducts}
             renderItem={(product) => (
               <List.Item

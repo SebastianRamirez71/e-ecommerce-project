@@ -3,7 +3,6 @@ import { app } from "../firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
-import toast, { Toaster } from "react-hot-toast";
 const auth = getAuth(app);
 export const AuthenticationContext = createContext();
 
@@ -19,10 +18,7 @@ export const AuthenticationContextProvider = ({ children }) => {
     password: "",
   });
 
-  const notify = () =>
-    toast("Has ingresado", {
-      icon: "✔",
-    });
+
 
   useEffect(() => {
     const unsubscribe = app.auth().onAuthStateChanged((usuarioFirebase) => {
@@ -57,7 +53,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((usuarioFirebase) => {
-        notify();
+
         setUser(usuarioFirebase);
         setEmail("");
         setOpen(false);
@@ -93,7 +89,6 @@ export const AuthenticationContextProvider = ({ children }) => {
         createUser,
         LogIn,
         signOut,
-        Toaster,
         formErrors,
         setFormErrors,
         setEmail,
