@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../NavBar/NavBar";
-import {  Form, Input, Card, Divider, Tooltip } from "antd";
+import { Form, Input, Card, Divider, Tooltip, Button, Result } from "antd";
 import { Link } from "react-router-dom";
 import Category from "../Category/Category";
 import PurchaseSuccess from "./PurchaseSuccess";
 import "./CheckOut.css";
 import { CartContext } from "../context/CartContext";
 import CardCustom from "../Cart/CardCustom";
+import { SmileOutlined } from "@ant-design/icons";
 
-function CheckOut({ location }) {
+function CheckOut({ location, products }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -16,7 +17,7 @@ function CheckOut({ location }) {
   const [validate, setValidate] = useState();
   const [showPurchaseSuccess, setShowPurchaseSuccess] = useState(false);
 
-  const { cart, price } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
 
   useEffect(() => {
     validateForm();
@@ -35,6 +36,9 @@ function CheckOut({ location }) {
   const handleValuesChange = (changedValues, allValues) => {
     validateForm();
   };
+  const handlePurchase = () => {
+    setShowPurchaseSuccess(true);
+  };
 
   const layout = {
     labelCol: {
@@ -51,10 +55,12 @@ function CheckOut({ location }) {
 
   return (
     <div>
-      <Navbar />
+      <Navbar products={products} />
       <Category />
-      {showPurchaseSuccess ? (
-        <PurchaseSuccess />
+      {cart < 1 ? (
+        <CheckOutEmpty />
+      ) : showPurchaseSuccess ? (
+        <PurchaseSuccess clearCart={clearCart} />
       ) : (
         <div className="checkout-container" style={{ padding: 20 }}>
           <div className="checkout-card">
@@ -180,6 +186,7 @@ function CheckOut({ location }) {
                 ))}
               </div>
               <Divider />
+
               <footer
                 style={{
                   display: "flex",
@@ -222,7 +229,7 @@ function CheckOut({ location }) {
                         cursor: "pointer",
                         color: "#007bff",
                       }}
-                      onClick={() => setShowPurchaseSuccess(true)}
+                      onClick={handlePurchase}
                     >
                       COMPRAR
                     </button>
@@ -247,3 +254,19 @@ function CheckOut({ location }) {
 }
 
 export default CheckOut;
+
+function CheckOutEmpty() {
+  return (
+    <>
+      <Result
+        icon={""}
+        title="Su carrito está vacio"
+        extra={
+          <Link to={"/home"}>
+            <Button type="primary">Elejir productos</Button>
+          </Link>
+        }
+      />
+    </>
+  );
+}

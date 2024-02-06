@@ -50,7 +50,7 @@ function App() {
       path: "/checkout",
       element: (
         <Protected>
-          <CheckOut loading={loading} />
+          <CheckOut loading={loading} products={products} />
         </Protected>
       ),
     },

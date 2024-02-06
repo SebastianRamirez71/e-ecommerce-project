@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   Avatar,
+  Badge,
   Button,
   Col,
   Drawer,
@@ -21,6 +22,7 @@ import { UserOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
 import Cart from "../Cart/Cart";
 import { AuthenticationContext } from "../context/authentication.context";
+import { CartContext } from "../context/CartContext";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
@@ -86,7 +88,7 @@ function AppMenu({ isInLine = false, products }) {
   const [isRegister, setIsRegister] = useState();
   const [hovered, setHovered] = useState(false);
   const { signOut, user } = useContext(AuthenticationContext);
-
+  const { cart } = useContext(CartContext);
   const onCreate = () => {
     setOpen(false);
   };
@@ -242,7 +244,7 @@ function AppMenu({ isInLine = false, products }) {
                 }}
               >
                 <Dropdown
-                placement="bottom"
+                  placement="bottom"
                   menu={{
                     items,
                   }}
@@ -259,7 +261,9 @@ function AppMenu({ isInLine = false, products }) {
                 </Dropdown>
               </div>
               <div>
-                <Cart />
+                <Badge count={cart.length}>
+                  <Cart />
+                </Badge>
               </div>
             </div>
           )}
@@ -311,7 +315,7 @@ function SearchMenu({ products }) {
           stock: selectedProduct.stock,
           price: selectedProduct.price,
           imgS: selectedProduct.imgS,
-          sizes: selectedProduct.sizes,
+          size: selectedProduct.size,
         },
       });
     }
@@ -364,7 +368,6 @@ function SearchMenu({ products }) {
           }}
         >
           <List
-          
             dataSource={filteredProducts}
             renderItem={(product) => (
               <List.Item
