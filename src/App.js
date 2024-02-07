@@ -8,6 +8,7 @@ import { CartProvider } from "./context/CartContext";
 import CheckOut from "./CheckOut/CheckOut";
 import Protected from "./Button/routes/Protected";
 import { AuthenticationContextProvider } from "./context/authentication.context";
+import InfoPage from "./InfoPage/InfoPage";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -53,6 +54,10 @@ function App() {
           <CheckOut loading={loading} products={products} />
         </Protected>
       ),
+    },
+    {
+      path: "/info",
+      element: <InfoPage products={products} />,
     },
   ]);
 

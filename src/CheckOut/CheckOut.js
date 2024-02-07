@@ -38,6 +38,7 @@ function CheckOut({ location, products }) {
   };
   const handlePurchase = () => {
     setShowPurchaseSuccess(true);
+
   };
 
   const layout = {

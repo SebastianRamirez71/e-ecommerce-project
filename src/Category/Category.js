@@ -25,7 +25,9 @@ function Category() {
       </Link>
       {isMobile ? <Cart isMobile={isMobile} /> : ""}
       {isMobile ? "" : <li style={{ margin: "0 15px" }}>CONTACTO</li>}
-      <li style={{ margin: "0 15px" }}>INFO</li>
+      <Link to={"/info"} style={{ textDecoration: "none", color: "black" }}>
+        <li style={{ margin: "0 15px" }}>INFO</li>
+      </Link>
     </ul>
   );
 }
