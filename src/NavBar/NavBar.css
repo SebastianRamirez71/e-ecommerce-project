@@ -5,6 +5,16 @@ h2{
 
 }
 
+.icon-container {
+  display: inline-block;
+  position: relative;
+  color: #000; 
+  transition: color 0.3s ease; 
+}
+
+.icon-container:hover {
+  color: #858282; 
+}
 
   
   .headerMenu {

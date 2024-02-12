@@ -4,7 +4,6 @@ import { UserOutlined } from "@ant-design/icons";
 
 import { AuthenticationContext } from "../context/authentication.context";
 
-
 function SignUp({ open, onCancel, isRegister, setOpen }) {
   const {
     LogIn,
@@ -59,31 +58,23 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
 
     return Object.values(errors).every((error) => !error);
   };
-
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
   return (
     <>
       <Modal
         style={{
-          maxWidth: "100%",
           justifyContent: "center",
           textAlign: "center",
           alignContent: "center",
         }}
         open={open}
-        title={
-          <>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <h5>{isRegister ? "Crear Cuenta" : "Iniciar Sesion"}</h5>
-              <UserOutlined style={{ fontSize: 24, alignItems: "center" }} />
-            </div>
-          </>
-        }
         footer={null}
         onCancel={onCancel}
         onOk={() => {
@@ -152,7 +143,7 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
           </div>
           <div style={{ textAlign: "center", marginTop: 8 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              {isRegister ? "Crear Sesion" : "Iniciar Sesion"}
             </Button>
           </div>
         </Form>

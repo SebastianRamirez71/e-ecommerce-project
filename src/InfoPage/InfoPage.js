@@ -11,19 +11,9 @@ import {
 
 function InfoPage() {
   const childrenPayment = (
-    <div
-      style={{ maxWidth: "600px", alignItems: "center", textAlign: "center" }}
-    >
+    <div style={{ maxWidth: "100%", textAlign: "center" }}>
       <h3>Formas de pago</h3>
-      <hr />
-      <p
-        style={{
-          maxWidth: "100%",
-          wordWrap: "break-word",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
+      <p>
         <strong>¿Cómo puedo pagar?</strong>
         <br />
         Podés pagar con los siguientes métodos de pago:
@@ -43,19 +33,9 @@ function InfoPage() {
   );
 
   const childrenStock = (
-    <div
-      style={{ maxWidth: "600px", alignItems: "center", textAlign: "center" }}
-    >
+    <div style={{ maxWidth: "100%", textAlign: "center" }}>
       <h3>Consulta de stock</h3>
-      <hr />
-      <p
-        style={{
-          maxWidth: "100%",
-          wordWrap: "break-word",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
+      <p>
         <strong>¿Hay algun limite de compra?</strong>
         <br />
         No. El único límite de compra que tenemos es el stock de nuestro e-Shop.
@@ -72,19 +52,10 @@ function InfoPage() {
   );
 
   const childrenQuestion = (
-    <div
-      style={{ maxWidth: "600px", alignItems: "center", textAlign: "center" }}
-    >
+    <div style={{ maxWidth: "100%", textAlign: "center" }}>
       <h3>Consultas generales</h3>
-      <hr />
-      <p
-        style={{
-          maxWidth: "100%",
-          wordWrap: "break-word",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
+
+      <p>
         <strong>¿Como se realizan los envios?</strong>
         <br />
         Trabajamos con: Andreani principalmente para despachar en todo Argentina
@@ -109,44 +80,26 @@ function InfoPage() {
       </p>
     </div>
   );
+
   return (
     <>
       <NavBar />
       <Category />
       <div>
-        <h2>INFORMACION</h2>
+        <h2 style={{ textAlign: "center" }}>INFORMACION</h2>
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Tabs
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-          defaultActiveKey="1"
-          size="large"
-          items={[
-            {
-              icon: <StockOutlined />,
-              label: "Consulta de Stock",
-              key: "1",
-              children: childrenStock,
-            },
-            {
-              icon: <CreditCardOutlined />,
-              label: "Formas de Pago",
-              key: "2",
-              children: childrenPayment,
-            },
-            {
-              icon: <CommentOutlined />,
-              label: "Consultas Generales",
-              key: "3",
-              children: childrenQuestion,
-            },
-          ]}
-        />
+      <div style={{ width: "100%", padding: "0 15px" }}>
+        <Tabs defaultActiveKey="1" size="small" tabPosition="top" centered>
+          <Tabs.TabPane icon={<StockOutlined />} tab="Stock" key="1">
+            {childrenStock}
+          </Tabs.TabPane>
+          <Tabs.TabPane icon={<CreditCardOutlined />} tab="Pago" key="2">
+            {childrenPayment}
+          </Tabs.TabPane>
+          <Tabs.TabPane icon={<CommentOutlined />} tab="Dudas" key="3">
+            {childrenQuestion}
+          </Tabs.TabPane>
+        </Tabs>
       </div>
     </>
   );

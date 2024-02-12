@@ -75,6 +75,7 @@ function CheckOut({ location, products }) {
             >
               <div>
                 <Form
+                
                   onChangeCapture={handleSubmit}
                   onValuesChange={handleValuesChange}
                   {...layout}

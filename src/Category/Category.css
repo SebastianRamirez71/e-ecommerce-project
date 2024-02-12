@@ -1,5 +1,9 @@
-.categories li{
+li{
     display: inline-block;
-
-    margin: 0 0.5em;
+    position: relative;
+    color: #000; 
+    transition: color 0.3s ease; 
+}
+li:hover{
+    color: #858282; 
 }

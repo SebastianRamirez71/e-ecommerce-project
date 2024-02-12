@@ -4,6 +4,7 @@ import {
   Badge,
   Button,
   Col,
+  Divider,
   Drawer,
   Dropdown,
   Image,
@@ -17,19 +18,44 @@ import "./NavBar.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchProducts from "../SearchProducts/SearchProducts";
 import SignUp from "../SignUp/SignUp";
-import { app } from "../firebase";
 import { UserOutlined } from "@ant-design/icons";
 import "../SearchProducts/SearchProducts.css";
 import Cart from "../Cart/Cart";
 import { AuthenticationContext } from "../context/authentication.context";
 import { CartContext } from "../context/CartContext";
+import { Toaster } from "react-hot-toast";
+import MenuMobile from "./MenuMobile";
 function NavBar({ products }) {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const [size] = useState("large");
+  const { signOut, user } = useContext(AuthenticationContext);
+
   const onClose = () => {
     setOpenSearch(false);
   };
+
+  const mobileAccounts = (
+    <div
+      style={{
+        marginTop: "100%",
+        display: "flex",
+        textAlign: "start",
+        justifyContent: "start",
+        gap: 8,
+      }}
+    >
+      {user ? (
+        <div>
+          <p>Cerrar Sesion</p>
+        </div>
+      ) : (
+        <>
+          <p>Crear Cuenta</p>|<p>Iniciar Sesion</p>
+        </>
+      )}
+    </div>
+  );
 
   return (
     <div className="navBar">
@@ -63,14 +89,21 @@ function NavBar({ products }) {
       </div>
 
       <Drawer
+        width={300}
+        style={{ border: "none", outline: "none" }}
         placement="left"
         open={openMenu}
         onClose={() => {
           setOpenMenu(false);
         }}
         closeable={false}
+        footer={mobileAccounts}
       >
-        <AppMenu isInLine />
+        <Link>
+          <p>CONTACTO</p>
+        </Link>
+        <Divider />
+        <p>FAVORITOS</p>
       </Drawer>
       <Drawer
         title={<SearchMenu products={products} />}
@@ -79,6 +112,7 @@ function NavBar({ products }) {
         onClose={onClose}
         open={openSearch}
       ></Drawer>
+      <Toaster />
     </div>
   );
 }
@@ -86,7 +120,6 @@ function NavBar({ products }) {
 function AppMenu({ isInLine = false, products }) {
   const [open, setOpen] = useState(false);
   const [isRegister, setIsRegister] = useState();
-  const [hovered, setHovered] = useState(false);
   const { signOut, user } = useContext(AuthenticationContext);
   const { cart } = useContext(CartContext);
   const onCreate = () => {
@@ -148,7 +181,6 @@ function AppMenu({ isInLine = false, products }) {
               }}
             >
               <button
-                className="hover-effect"
                 style={{
                   border: "none",
                   background: "none",
@@ -162,6 +194,7 @@ function AppMenu({ isInLine = false, products }) {
           key: "1",
         },
   ];
+
   return (
     <Menu
       mode={isInLine ? "vertical" : ""}
@@ -169,6 +202,7 @@ function AppMenu({ isInLine = false, products }) {
       style={{
         display: "flex",
         alignItems: "center",
+        height: "100%",
       }}
     >
       <Row align="middle" justify={isInLine ? "center" : ""}>
@@ -196,44 +230,14 @@ function AppMenu({ isInLine = false, products }) {
             />
           </Link>
         </Col>
-        <Col xs={isInLine ? 12 : 8} style={{ textAlign: "center" }}>
-          {isInLine ? (
-            <div>
-              {user ? (
-                <div>
-                  <p>Bienvenido</p>
-                  <Button onClick={signOut}>Cerrar Sesion</Button>
-                </div>
-              ) : (
-                <>
-                  <Button
-                    style={{ marginBottom: 8 }}
-                    onClick={() => {
-                      setOpen(true);
-                      setIsRegister(true);
-                    }}
-                  >
-                    Crear Cuenta
-                  </Button>
-
-                  <Button
-                    onClick={() => {
-                      setOpen(true);
-                      setIsRegister(false);
-                    }}
-                  >
-                    Iniciar Sesion
-                  </Button>
-                </>
-              )}
-            </div>
-          ) : (
+        <Col xs={isInLine ? 12 : 8} style={{ border: "none" }}>
+          {isInLine ? null : (
             <div
               style={{
                 justifyContent: "center",
                 display: "flex",
                 gap: "15px",
-                alignItems: "center", // Alinea los elementos verticalmente
+                alignItems: "center",
               }}
             >
               <div
@@ -244,6 +248,7 @@ function AppMenu({ isInLine = false, products }) {
                 }}
               >
                 <Dropdown
+                  trigger={["click"]}
                   placement="bottom"
                   menu={{
                     items,
@@ -251,8 +256,7 @@ function AppMenu({ isInLine = false, products }) {
                 >
                   <a onClick={(e) => e.preventDefault()}>
                     <UserOutlined
-                      onMouseOver={() => setHovered(true)}
-                      onMouseOut={() => setHovered(false)}
+                      className="icon-container"
                       style={{
                         fontSize: 28,
                       }}
@@ -261,7 +265,7 @@ function AppMenu({ isInLine = false, products }) {
                 </Dropdown>
               </div>
               <div>
-                <Badge count={cart.length}>
+                <Badge count={cart.length} className="icon-container">
                   <Cart />
                 </Badge>
               </div>

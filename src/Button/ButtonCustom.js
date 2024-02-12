@@ -26,7 +26,7 @@ function ButtonCustom({ location, sizeSelected }) {
           Agregar
         </Button>
       )}
-      <Toaster />
+      
     </div>
   );
 }
