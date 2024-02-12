@@ -119,7 +119,7 @@ function Cart({ isMobile }) {
   return (
     <div>
       {isMobile ? (
-        <li onClick={showDrawer} style={{ cursor: "pointer" }}>
+        <li onClick={showDrawer} style={{ cursor: "pointer"}}>
           CARRITO
         </li>
       ) : (

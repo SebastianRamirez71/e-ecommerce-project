@@ -26,7 +26,7 @@ function CarouselOffer({ products }) {
   };
 
   return (
-    <div style={{ marginBottom: "10px", marginTop: "30px" }}>
+    <div style={{ marginBottom: "10px", marginTop: "30px" }} id="offers">
       <h2>PRODUCTOS EN OFERTA</h2>
 
       <Carousel responsive={responsive}>

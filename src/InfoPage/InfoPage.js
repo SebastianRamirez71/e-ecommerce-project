@@ -9,7 +9,7 @@ import {
   UserDeleteOutlined,
 } from "@ant-design/icons";
 
-function InfoPage() {
+function InfoPage({products}) {
   const childrenPayment = (
     <div style={{ maxWidth: "100%", textAlign: "center" }}>
       <h3>Formas de pago</h3>
@@ -83,7 +83,7 @@ function InfoPage() {
 
   return (
     <>
-      <NavBar />
+      <NavBar products={products} />
       <Category />
       <div>
         <h2 style={{ textAlign: "center" }}>INFORMACION</h2>
