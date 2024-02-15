@@ -144,7 +144,7 @@ function NavBar({ products }) {
         closeable={false}
         footer={mobileAccounts}
       >
-        <Link to={"/info"} style={{ textDecoration: "none", color: "black" }}>
+        <Link to={"/contact"} style={{ textDecoration: "none", color: "black" }}>
           <p>CONTACTO</p>
         </Link>
         <Divider />

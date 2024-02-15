@@ -111,7 +111,6 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
               <label style={{ margin: 0 }}>Email:</label>
               <Input
                 type="email"
-                id={isRegister ? "emailFieldRegister" : "emailFieldLogin"}
                 placeholder={isRegister ? "youremail@gmail.com" : ""}
                 style={{ width: "100%" }}
                 onChange={(e) => setEmail(e.target.value)}
@@ -132,7 +131,7 @@ function SignUp({ open, onCancel, isRegister, setOpen }) {
               <label style={{ margin: 0 }}>Contraseña:</label>
               <Input.Password
                 style={{ width: "100%" }}
-                id={isRegister ? "passwordFieldRegister" : "passwordFieldLogin"}
+                autocomplete="on"
                 onChange={(e) => setPassword(e.target.value)}
               />
 

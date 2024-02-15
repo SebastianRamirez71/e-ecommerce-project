@@ -9,6 +9,7 @@ import CheckOut from "./CheckOut/CheckOut";
 import Protected from "./Button/routes/Protected";
 import { AuthenticationContextProvider } from "./context/authentication.context";
 import InfoPage from "./InfoPage/InfoPage";
+import ContactPage from "./Contact/ContactPage";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -59,6 +60,10 @@ function App() {
       path: "/info",
       element: <InfoPage products={products} />,
     },
+    {
+      path:"/contact",
+      element:<ContactPage products={products} />,
+    }
   ]);
 
   return (

@@ -1,16 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useMediaQuery } from "@mui/material";
 import "./Category.css";
 function Category() {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const navigate = useNavigate();
+  const route = window.location.pathname;
+  console.log("Ruta actual:", route);
+
   const scrollToOffers = () => {
-    const section = document.getElementById("offers");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    if (route !== "/home") {
+      navigate("/home");
+    } else {
+      const section = document.getElementById("offers");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
+
   return (
     <ul
       className="categories"
@@ -27,7 +36,7 @@ function Category() {
       }}
     >
       <Link to={"/home"} style={{ textDecoration: "none", color: "black" }}>
-        <li style={{}}>INICIO</li>
+        <li style={{ margin: "0 15px" }}>INICIO</li>
       </Link>
       {isMobile ? <Cart isMobile={isMobile} /> : ""}
       {isMobile ? (
@@ -36,7 +45,12 @@ function Category() {
           OFERTAS
         </li>
       ) : (
-        <li style={{ margin: "0 15px" }}>CONTACTO</li>
+        <Link
+          to={"/contact"}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <li style={{ margin: "0 15px" }}>CONTACTO</li>
+        </Link>
       )}
       {isMobile ? null : (
         <Link to={"/info"} style={{ textDecoration: "none", color: "black" }}>

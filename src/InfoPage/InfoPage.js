@@ -8,8 +8,8 @@ import {
   StockOutlined,
   UserDeleteOutlined,
 } from "@ant-design/icons";
-
-function InfoPage({products}) {
+import Footer from "../Footer/Footer";
+function InfoPage({ products }) {
   const childrenPayment = (
     <div style={{ maxWidth: "100%", textAlign: "center" }}>
       <h3>Formas de pago</h3>
@@ -89,7 +89,7 @@ function InfoPage({products}) {
         <h2 style={{ textAlign: "center" }}>INFORMACION</h2>
       </div>
       <div style={{ width: "100%", padding: "0 15px" }}>
-        <Tabs defaultActiveKey="1" size="small" tabPosition="top" centered>
+        <Tabs defaultActiveKey="1" size="medium" tabPosition="top" centered>
           <Tabs.TabPane icon={<StockOutlined />} tab="Stock" key="1">
             {childrenStock}
           </Tabs.TabPane>
@@ -101,6 +101,7 @@ function InfoPage({products}) {
           </Tabs.TabPane>
         </Tabs>
       </div>
+      <Footer />
     </>
   );
 }

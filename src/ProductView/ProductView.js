@@ -9,7 +9,6 @@ import { CreditCardOutlined } from "@ant-design/icons";
 import "./ProductView.css";
 import ButtonCustom from "../Button/ButtonCustom";
 import Footer from "../Footer/Footer";
-import CarouselOffer from "../Carousel/CarouselOffer";
 function ProductView({ loading, products }) {
   const location = useLocation();
   const { imgS, stock, price, title, size } = location.state || {};
