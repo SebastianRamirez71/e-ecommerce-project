@@ -373,6 +373,8 @@ function SearchMenu({ products }) {
           price: selectedProduct.price,
           imgS: selectedProduct.imgS,
           size: selectedProduct.size,
+          details: selectedProduct.details
+
         },
       });
     }

@@ -36,6 +36,7 @@ const SearchProducts = ({ products }) => {
           price: selectedProduct.price,
           imgS: selectedProduct.imgS,
           size: selectedProduct.size,
+          details: selectedProduct.details
         },
       });
     }

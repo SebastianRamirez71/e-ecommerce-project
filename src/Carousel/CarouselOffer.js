@@ -31,7 +31,7 @@ function CarouselOffer({ products }) {
 
       <Carousel responsive={responsive}>
         {products.map(
-          ({ id, title, img, stock, price, imgS, product, size }) => (
+          ({ id, title, img, stock, price, imgS, product, size, details}) => (
             <CardCarousel
               key={id}
               id={id}
@@ -42,6 +42,7 @@ function CarouselOffer({ products }) {
               price={price}
               product={product}
               size={size}
+              details={details}
             />
           )
         )}

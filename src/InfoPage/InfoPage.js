@@ -8,7 +8,7 @@ import {
   StockOutlined,
   UserDeleteOutlined,
 } from "@ant-design/icons";
-import Footer from "../Footer/Footer";
+
 function InfoPage({ products }) {
   const childrenPayment = (
     <div style={{ maxWidth: "100%", textAlign: "center" }}>
@@ -101,7 +101,7 @@ function InfoPage({ products }) {
           </Tabs.TabPane>
         </Tabs>
       </div>
-      <Footer />
+
     </>
   );
 }

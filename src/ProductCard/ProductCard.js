@@ -3,7 +3,7 @@ import Meta from "antd/es/card/Meta";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ProductCard = ({ id, title, img, stock, price, imgS, product, size }) => {
+const ProductCard = ({ id, title, img, stock, price, imgS, product, size, details }) => {
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(false);
 
@@ -18,6 +18,7 @@ const ProductCard = ({ id, title, img, stock, price, imgS, product, size }) => {
         imgS,
         product,
         size,
+        details
       },
     });
   };

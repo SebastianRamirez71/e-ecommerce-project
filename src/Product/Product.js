@@ -53,7 +53,7 @@ function Product({ clothes }) {
                 .trim()
                 .includes(searchText.toLowerCase().trim())
             )
-            .map(({ product, title, price, img, imgS, stock, id, size }) => (
+            .map(({ product, title, price, img, imgS, stock, id, size, details }) => (
               <div
                 key={id}
                 className="col-6 col-sm-6 col-md-6 col-lg-6"
@@ -69,6 +69,7 @@ function Product({ clothes }) {
                   price={price}
                   product={product}
                   size={size}
+                  details={details}
                 />
               </div>
             ))}

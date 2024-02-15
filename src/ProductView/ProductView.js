@@ -8,10 +8,10 @@ import { Radio } from "antd";
 import { CreditCardOutlined } from "@ant-design/icons";
 import "./ProductView.css";
 import ButtonCustom from "../Button/ButtonCustom";
-import Footer from "../Footer/Footer";
+
 function ProductView({ loading, products }) {
   const location = useLocation();
-  const { imgS, stock, price, title, size } = location.state || {};
+  const { imgS, stock, price, title, size, details } = location.state || {};
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sizeSelected, setSizeSelected] = useState();
@@ -29,7 +29,8 @@ function ProductView({ loading, products }) {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-
+  console.log(title);
+  console.log(details);
   return (
     <>
       {loading ? (
@@ -129,35 +130,16 @@ function ProductView({ loading, products }) {
                   <div
                     style={{
                       display: "flex",
+                      flexDirection: "column",
                       marginTop: "10px",
                     }}
                   >
-                    <ul
-                      style={{ listStyleType: "none", margin: 0, padding: 0 }}
-                    >
-                      <li style={{ marginBottom: "8px" }}>
-                        <h5 style={{ margin: 0 }}>Descripción</h5>
-                      </li>
-                      <li style={{ marginBottom: "4px" }}>
-                        Adecuado para: Entrenamiento
-                      </li>
-                      <li style={{ marginBottom: "4px" }}>
-                        Material: Mix de materiales sintéticos
-                      </li>
-                      <li style={{ marginBottom: "4px" }}>
-                        Beneficios: Amortiguación
-                      </li>
-                      <li>
-                        Composición: Capellada: Mesh y Sintético / Suela: Goma
-                      </li>
-                    </ul>
+                    <p style={{ fontSize: 14 }}>{details}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <Footer />
         </div>
       )}
     </>

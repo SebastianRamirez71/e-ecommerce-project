@@ -1,8 +1,8 @@
-import { Button } from "antd";
+import { Button, Tooltip } from "antd";
 import React from "react";
 import { useCart } from "../Hooks/userCart";
 import toast, { Toaster } from "react-hot-toast";
-
+import "./ButtonCustom.css";
 function ButtonCustom({ location, sizeSelected }) {
   const { addToCart } = useCart();
 
@@ -17,16 +17,23 @@ function ButtonCustom({ location, sizeSelected }) {
     notify();
   };
 
-  return (
-    <div style={{ textAlign: "start", marginTop: 10 }}>
+  return ( 
+    <div style={{ textAlign: "start", marginTop: 10 }} className="button-custom">
       {sizeSelected ? (
-        <Button onClick={handleAddToCart}>Agregar</Button>
+        <button onClick={handleAddToCart}>
+          <span>AGREGAR</span>
+        </button>
       ) : (
-        <Button disabled onClick={handleAddToCart}>
-          Agregar
-        </Button>
+        <Tooltip title="Seleccione un talle" placement="right">
+          <button
+            disabled
+            onClick={handleAddToCart}
+            style={{ cursor: "no-drop" }}
+          >
+            <span>AGREGAR</span>
+          </button>
+        </Tooltip>
       )}
-      
     </div>
   );
 }

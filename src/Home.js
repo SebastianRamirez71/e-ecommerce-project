@@ -4,7 +4,7 @@ import Category from "./Category/Category";
 
 import Product from "./Product/Product";
 import { Spin } from "antd";
-import Footer from "./Footer/Footer";
+
 
 function Home({ products, loading }) {
   return (
@@ -22,11 +22,11 @@ function Home({ products, loading }) {
           <Spin size="large" />
         </div>
       ) : (
-        <div >
+        <div>
           <NavBar products={products} />
           <Category />
           <Product clothes={products} />
-          <Footer />
+          
         </div>
       )}
     </>

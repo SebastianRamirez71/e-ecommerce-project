@@ -61,9 +61,9 @@ function App() {
       element: <InfoPage products={products} />,
     },
     {
-      path:"/contact",
-      element:<ContactPage products={products} />,
-    }
+      path: "/contact",
+      element: <ContactPage products={products} />,
+    },
   ]);
 
   return (
