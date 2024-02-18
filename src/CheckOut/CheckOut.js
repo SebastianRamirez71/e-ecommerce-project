@@ -8,6 +8,7 @@ import "./CheckOut.css";
 import { CartContext } from "../context/CartContext";
 import CardCustom from "../Cart/CardCustom";
 import { SmileOutlined } from "@ant-design/icons";
+import FooterCustom from "../FooterCustom/FooterCustom";
 
 function CheckOut({ location, products }) {
   const [email, setEmail] = useState("");
@@ -38,7 +39,6 @@ function CheckOut({ location, products }) {
   };
   const handlePurchase = () => {
     setShowPurchaseSuccess(true);
-
   };
 
   const layout = {
@@ -56,201 +56,203 @@ function CheckOut({ location, products }) {
 
   return (
     <div>
-      <Navbar products={products} />
-      <Category />
-      {cart < 1 ? (
-        <CheckOutEmpty />
-      ) : showPurchaseSuccess ? (
-        <PurchaseSuccess clearCart={clearCart} />
-      ) : (
-        <div className="checkout-container" style={{ padding: 20 }}>
-          <div className="checkout-card">
-            <Card
-              title="Identificación"
-              bordered={true}
-              style={{
-                width: "100%",
-              }}
-              className="card"
-            >
-              <div>
-                <Form
-                
-                  onChangeCapture={handleSubmit}
-                  onValuesChange={handleValuesChange}
-                  {...layout}
-                  labelCol={{
-                    flex: "110px",
-                  }}
-                  labelAlign="left"
-                  labelWrap
-                  wrapperCol={{
-                    flex: 1,
-                  }}
-                  colon={false}
-                >
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ height: "100vh" }}>
+        <Navbar products={products} />
+        <Category />
+        {cart < 1 ? (
+          <CheckOutEmpty />
+        ) : showPurchaseSuccess ? (
+          <PurchaseSuccess clearCart={clearCart} />
+        ) : (
+          <div className="checkout-container" style={{ padding: 20 }}>
+            <div className="checkout-card">
+              <Card
+                title="Identificación"
+                bordered={true}
+                style={{
+                  width: "100%",
+                }}
+                className="card"
+              >
+                <div>
+                  <Form
+                    onChangeCapture={handleSubmit}
+                    onValuesChange={handleValuesChange}
+                    {...layout}
+                    labelCol={{
+                      flex: "110px",
+                    }}
+                    labelAlign="left"
+                    labelWrap
+                    wrapperCol={{
+                      flex: 1,
+                    }}
+                    colon={false}
+                  >
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Item
+                        label="Email"
+                        name="email"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Ingrese su email",
+                          },
+                        ]}
+                      >
+                        <Input
+                          type="email"
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </Form.Item>
+                    </div>
+
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <Form.Item
+                        label="Nombre"
+                        name="nombre"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Ingrese su nombre",
+                          },
+                        ]}
+                      >
+                        <Input onChange={(e) => setName(e.target.value)} />
+                      </Form.Item>
+                      <Form.Item
+                        label="Apellido"
+                        name="Apellido"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Ingrese su apellido",
+                          },
+                        ]}
+                      >
+                        <Input onChange={(e) => setAddress(e.target.value)} />
+                      </Form.Item>
+                    </div>
                     <Form.Item
-                      label="Email"
-                      name="email"
+                      name="phone"
+                      label="Telefono/Movil"
                       rules={[
                         {
                           required: true,
-                          message: "Ingrese su email",
+                          message: "Ingrese su numero de telefono/movil",
                         },
                       ]}
                     >
                       <Input
-                        type="email"
-                        onChange={(e) => setEmail(e.target.value)}
+                        style={{
+                          width: "100%",
+                        }}
+                        type="number"
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </Form.Item>
-                  </div>
-
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <Form.Item
-                      label="Nombre"
-                      name="nombre"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Ingrese su nombre",
-                        },
-                      ]}
-                    >
-                      <Input onChange={(e) => setName(e.target.value)} />
-                    </Form.Item>
-                    <Form.Item
-                      label="Apellido"
-                      name="Apellido"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Ingrese su apellido",
-                        },
-                      ]}
-                    >
-                      <Input onChange={(e) => setAddress(e.target.value)} />
-                    </Form.Item>
-                  </div>
-                  <Form.Item
-                    name="phone"
-                    label="Telefono/Movil"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Ingrese su numero de telefono/movil",
-                      },
-                    ]}
-                  >
-                    <Input
-                      style={{
-                        width: "100%",
-                      }}
-                      type="number"
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  </Form.Item>
-                </Form>
-              </div>
-            </Card>
-          </div>
-
-          <div style={{ width: "100%", maxWidth: "600px" }}>
-            <Card
-              title="Resumen de la compra"
-              bordered={true}
-              style={{
-                width: "100%",
-              }}
-              className="card"
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  flexDirection: "column",
-                }}
-              >
-                {cart.map((product) => (
-                  <CardCustom
-                    img={product.img}
-                    size={product.size}
-                    price={product.price}
-                    title={product.title}
-                    addToCart={product.addToCart}
-                    clearProduct={product.clearProduct}
-                    quantity={product.quantity}
-                    id={product.id}
-                    location={product}
-                    sizeSelected={product.sizeSelected}
-                  />
-                ))}
-              </div>
-              <Divider />
-
-              <footer
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "10px",
-                }}
-              >
-                <div style={{ textAlign: "start", alignItems: "center" }}>
-                  <h5>Total: </h5>
-                  <Link to={"/home"}>
-                    <button
-                      style={{
-                        border: "none",
-                        backgroundColor: "white",
-                        cursor: "pointer",
-                        color: "#007bff",
-                        textAlign: "start",
-                      }}
-                    >
-                      VER MAS PRODUCTOS
-                    </button>
-                  </Link>
+                  </Form>
                 </div>
+              </Card>
+            </div>
 
+            <div style={{ width: "100%", maxWidth: "600px" }}>
+              <Card
+                title="Resumen de la compra"
+                bordered={true}
+                style={{
+                  width: "100%",
+                }}
+                className="card"
+              >
                 <div
                   style={{
                     display: "flex",
+                    gap: 10,
                     flexDirection: "column",
-                    alignItems: "flex-end",
-                    alignItems: "center",
                   }}
                 >
-                  <h5>${totalCost}</h5>
-                  {validate ? (
-                    <button
-                      style={{
-                        border: "none",
-                        backgroundColor: "white",
-                        cursor: "pointer",
-                        color: "#007bff",
-                      }}
-                      onClick={handlePurchase}
-                    >
-                      COMPRAR
-                    </button>
-                  ) : (
-                    <Tooltip title="Complete sus datos" placement="left">
+                  {cart.map((product) => (
+                    <CardCustom
+                      img={product.img}
+                      size={product.size}
+                      price={product.price}
+                      title={product.title}
+                      addToCart={product.addToCart}
+                      clearProduct={product.clearProduct}
+                      quantity={product.quantity}
+                      id={product.id}
+                      location={product}
+                      sizeSelected={product.sizeSelected}
+                    />
+                  ))}
+                </div>
+                <Divider />
+
+                <footer
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "10px",
+                  }}
+                >
+                  <div style={{ textAlign: "start", alignItems: "center" }}>
+                    <h5>Total: </h5>
+                    <Link to={"/home"}>
                       <button
-                        style={{ border: "none", backgroundColor: "white" }}
-                        disabled
+                        style={{
+                          border: "none",
+                          backgroundColor: "white",
+                          cursor: "pointer",
+                          color: "#007bff",
+                          textAlign: "start",
+                        }}
+                      >
+                        VER MAS PRODUCTOS
+                      </button>
+                    </Link>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "flex-end",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h5>${totalCost}</h5>
+                    {validate ? (
+                      <button
+                        style={{
+                          border: "none",
+                          backgroundColor: "white",
+                          cursor: "pointer",
+                          color: "#007bff",
+                        }}
+                        onClick={handlePurchase}
                       >
                         COMPRAR
                       </button>
-                    </Tooltip>
-                  )}
-                </div>
-              </footer>
-            </Card>
+                    ) : (
+                      <Tooltip title="Complete sus datos" placement="left">
+                        <button
+                          style={{ border: "none", backgroundColor: "white" }}
+                          disabled
+                        >
+                          COMPRAR
+                        </button>
+                      </Tooltip>
+                    )}
+                  </div>
+                </footer>
+              </Card>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+      <FooterCustom />
     </div>
   );
 }

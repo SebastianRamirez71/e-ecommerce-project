@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 
 import { CartProvider } from "./context/CartContext";
 import CheckOut from "./CheckOut/CheckOut";
-import Protected from "./Button/routes/Protected";
+import Protected from "./routes/Protected";
 import { AuthenticationContextProvider } from "./context/authentication.context";
 import InfoPage from "./InfoPage/InfoPage";
 import ContactPage from "./Contact/ContactPage";
+import NotFoundPage from "./routes/NotFoundPage";
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -63,6 +65,10 @@ function App() {
     {
       path: "/contact",
       element: <ContactPage products={products} />,
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
     },
   ]);
 

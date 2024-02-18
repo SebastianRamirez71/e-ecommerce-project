@@ -8,12 +8,13 @@ import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Category from "../Category/Category";
 import "./ContactPage.css";
+import FooterCustom from "../FooterCustom/FooterCustom";
 
-function ContactPage() {
+function ContactPage({ products }) {
   return (
     <div>
-      <div style={{ minHeight: "auto", marginBottom:20 }}>
-        <NavBar />
+      <div style={{ height: "100vh" }}>
+        <NavBar products={products} />
         <Category />
         <h3>CONTACTO</h3>
         <div
@@ -64,7 +65,7 @@ function ContactPage() {
           </Card>
         </div>
       </div>
-  
+      <FooterCustom />
     </div>
   );
 }

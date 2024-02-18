@@ -119,7 +119,10 @@ function Cart({ isMobile }) {
   return (
     <div>
       {isMobile ? (
-        <li onClick={showDrawer} style={{ cursor: "pointer"}}>
+        <li
+          onClick={showDrawer}
+          style={{ cursor: "pointer", margin: "0 15px" }}
+        >
           CARRITO
         </li>
       ) : (
@@ -152,12 +155,20 @@ function Cart({ isMobile }) {
           >
             {cart.length < 1 ? (
               <>
-                
-                <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:8, textAlign:"center"}}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 8,
+                    textAlign: "center",
+                  }}
+                >
                   <img src={emptySVG} width={160} />
-                  <h5 style={{ textAlign: "center", fontSize:16 }}>Su carrito esta vacio</h5>
+                  <h5 style={{ textAlign: "center", fontSize: 16 }}>
+                    Su carrito esta vacio
+                  </h5>
                 </div>
-                
               </>
             ) : (
               cart.map((product) => (

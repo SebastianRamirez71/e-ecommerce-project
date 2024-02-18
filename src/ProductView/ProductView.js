@@ -8,6 +8,7 @@ import { Radio } from "antd";
 import { CreditCardOutlined } from "@ant-design/icons";
 import "./ProductView.css";
 import ButtonCustom from "../Button/ButtonCustom";
+import FooterCustom from "../FooterCustom/FooterCustom";
 
 function ProductView({ loading, products }) {
   const location = useLocation();
@@ -142,6 +143,7 @@ function ProductView({ loading, products }) {
           </div>
         </div>
       )}
+      <FooterCustom />
     </>
   );
 }

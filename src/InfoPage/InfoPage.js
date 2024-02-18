@@ -8,6 +8,7 @@ import {
   StockOutlined,
   UserDeleteOutlined,
 } from "@ant-design/icons";
+import FooterCustom from "../FooterCustom/FooterCustom";
 
 function InfoPage({ products }) {
   const childrenPayment = (
@@ -83,25 +84,27 @@ function InfoPage({ products }) {
 
   return (
     <>
-      <NavBar products={products} />
-      <Category />
-      <div>
-        <h2 style={{ textAlign: "center" }}>INFORMACION</h2>
+      <div style={{ height: "100vh" }}>
+        <NavBar products={products} />
+        <Category />
+        <div>
+          <h2 style={{ textAlign: "center" }}>INFORMACION</h2>
+        </div>
+        <div style={{ width: "100%", padding: "0 15px" }}>
+          <Tabs defaultActiveKey="1" size="medium" tabPosition="top" centered>
+            <Tabs.TabPane icon={<StockOutlined />} tab="Stock" key="1">
+              {childrenStock}
+            </Tabs.TabPane>
+            <Tabs.TabPane icon={<CreditCardOutlined />} tab="Pago" key="2">
+              {childrenPayment}
+            </Tabs.TabPane>
+            <Tabs.TabPane icon={<CommentOutlined />} tab="Dudas" key="3">
+              {childrenQuestion}
+            </Tabs.TabPane>
+          </Tabs>
+        </div>
       </div>
-      <div style={{ width: "100%", padding: "0 15px" }}>
-        <Tabs defaultActiveKey="1" size="medium" tabPosition="top" centered>
-          <Tabs.TabPane icon={<StockOutlined />} tab="Stock" key="1">
-            {childrenStock}
-          </Tabs.TabPane>
-          <Tabs.TabPane icon={<CreditCardOutlined />} tab="Pago" key="2">
-            {childrenPayment}
-          </Tabs.TabPane>
-          <Tabs.TabPane icon={<CommentOutlined />} tab="Dudas" key="3">
-            {childrenQuestion}
-          </Tabs.TabPane>
-        </Tabs>
-      </div>
-
+      <FooterCustom />
     </>
   );
 }
